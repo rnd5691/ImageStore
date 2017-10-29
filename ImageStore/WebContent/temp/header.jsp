@@ -15,7 +15,7 @@
 			<ul class="header_join">
 				<li>Pay Info</li>
 				<li>LOGIN</li>
-				<li><a href="<%=request.getContextPath() %>/join/joinForm_kind.jsp">JOIN</a></li>
+				<li><a href="<%=request.getContextPath() %>/join/joinForm_agreement.jsp">JOIN</a></li>
 			</ul>
 		</div>
 	</header>
