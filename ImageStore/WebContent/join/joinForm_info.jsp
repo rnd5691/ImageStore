@@ -20,6 +20,37 @@
 	$(function(){
 		var kind = '<%=kind%>';
 		$("#add").load('add/'+kind+'Add.jsp');
+		
+		$("#id").on({
+			change:function(){
+				ch=false;
+			},blur:function(){
+				var id = $(this).val();
+				var xmlhttp;
+				if(window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					if(this.readyState==4&&this.status==200){
+						alert(this.responseText.trim());
+						
+						if(this.responseText.trim()=='OK'){
+							ch=true;
+							$("#id_check").text("사용가능한 ID 입니다.");
+						}else{
+							ch=false;
+							$("#id_check").text("중복된 ID 입니다.");
+						}
+					}
+				}
+				
+				xmlhttp.open("GET", "IdCheck.jsp?id="+id);
+				xmlhttp.send();
+			}
+			})
 	});
 </script>
 <body>
@@ -36,7 +67,10 @@
 				<table class="table table-striped">
 					<tr>
 						<td><span>*</span>ID</td>
-						<td><input type="text" name="id" required="required"></td>
+						<td>
+							<input id="id"type="text" name="id" required="required">
+							<div id="id_check"></div>
+						</td>
 					</tr>
 					<tr>
 						<td><span>*</span>PW</td>
