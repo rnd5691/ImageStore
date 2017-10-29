@@ -15,6 +15,7 @@
 
 <script type="text/javascript">
 	$(function(){
+		/* 전체 동의 클릭 했을 때 반응 하는 코드 */
 		$("#checkbox").click(function(){
 			if($("#checkbox").prop('checked')){
 				$('input[class=checkbox]:checkbox').each(function(){
@@ -26,6 +27,20 @@
 				});
 			}
 		});
+		/* 전체동의를 제외한 체크박스 클릭했을 때 체크 상태에 대한 전체동의 체크박스 상태 관한 코드 */
+		$('input[class=checkbox]:checkbox').each(function(){
+			$(this).click(function(){
+				var check = true;
+				$('input[class=checkbox]:checkbox').each(function(){
+					if($(this).prop('checked')==false){
+						check = false;
+					}
+				});
+				$('#checkbox').prop('checked', check);
+			});
+		});
+		
+		
 	});
 </script>
 <body>
@@ -36,7 +51,7 @@
 		<article class="title">
 			<h1>회원 가입</h1> <h5>이용약관</h5>
 		</article>
-		<form class="agreement">
+		<form class="agreement" action="joinForm_kind.jsp">
 			<article class="whole">
 				<b>
 					이용약관, 개인정보 수집 및 이용,<br/>위치정보 이용약관 (선택),<br/>
@@ -154,7 +169,7 @@ Image Store 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 �
 			</article>
 			<article class="li">
 				<a href="../index.jsp" class="btn btn-default">비동의</a>
-				<button class="btn btn-default" id="yes">동의</button>
+				<button class="btn btn-default">동의</button>
 			</article>
 		</form>
 	</article>

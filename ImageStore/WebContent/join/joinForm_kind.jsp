@@ -23,16 +23,15 @@
 			<h1>회원 가입</h1> <h5>계정 선택</h5>
 		</article>
 		<article class="session">
-			<form action="joinForm_agreement.jsp">
+			<form action="joinForm_info.jsp">
 				<input type="hidden" name="kind" value="company">
 				<button class="btn">기업으로 가입하기</button>
 			</form>
-			<form action="joinForm_agreement.jsp">
+			<form action="joinForm_info.jsp">
 				<input type="hidden" name="kind" value="person">
 				<button class="btn">개인으로 가입하기</button>
 			</form>
-			<!-- <a href="joinForm_company.jsp"><h3>기업으로<br/>가입하기</h3></a>
-			<a href="#"><h3>개인으로<br/>가입하기</h3></a> -->
+			
 		</article>
 	</article>
 </section>

@@ -50,6 +50,10 @@ header{
 	
 }
 /*header 끝*/
+/* contents 공통 부분 */
+.body{
+	padding-top : 50px;
+}
 /*footer 시작*/
 footer	{
 	width: 100%;
@@ -79,7 +83,7 @@ footer	{
 	height: 100%;
 	
 }
-span{
+.footer_text>span{
 	margin-top : 30px;
 	font-size : 13px;
 	text-align: left;
