@@ -8,9 +8,24 @@
 <title>회원 가입</title>
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/join/joinForm_agreement.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+
 <script type="text/javascript">
 	$(function(){
-		
+		$("#checkbox").click(function(){
+			if($("#checkbox").prop('checked')){
+				$('input[class=checkbox]:checkbox').each(function(){
+					$(this).prop('checked',true);
+				});
+			}else{
+				$('input[class=checkbox]:checkbox').each(function(){
+					$(this).prop('checked',false);
+				});
+			}
+		});
 	});
 </script>
 <body>
@@ -138,7 +153,7 @@ Image Store 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 �
 					</ul>
 			</article>
 			<article class="li">
-				<a href="#" class="btn btn-default">비동의</a>
+				<a href="../index.jsp" class="btn btn-default">비동의</a>
 				<button class="btn btn-default" id="yes">동의</button>
 			</article>
 		</form>
