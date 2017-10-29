@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+.body{
+	width : 900px;
+	height: 509px;
+	margin: 0 auto;
+}
+.contents{
+	width : 900px;
+	height: 350px;
+	padding-top : 50px;
+	margin : 0 auto;
+}
+.title{
+	width : 100%;
+	height: 45px;
+	margin-bottom : 10px;
+	border-bottom: 1px solid #747474;
+}
+.title>h1, .title>h5{
+	display: inline-block;
+	margin : 0;
+}
+.session{
+	width : 900px;
+	height: 320px;
+	text-align : center;
+}
+form{
+	display: inline-block;
+}
+.btn{
+	width : 300px;
+	height: 300px;
+	margin-right : 10px;
+	display: inline-block;
+	border-radius : 10px;
+	border : 2px solid black;
+	box-shadow : 10px 10px 10px #D5D5D5;
+	background-color: white;
+	font-size : 15px;
+}
+.btn>h3{
+	margin-top: 125px;
+}
+
+.btn:HOVER {
+	box-shadow : 10px 10px 10px #83b14e;
+}
+
