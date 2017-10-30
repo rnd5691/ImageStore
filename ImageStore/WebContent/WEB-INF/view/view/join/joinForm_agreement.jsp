@@ -1,6 +1,7 @@
 <!-- 회원가입 시 이용약관 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
 	});
 </script>
 <body>
-<%@ include file="../temp/header.jsp" %>
+<c:import url="../temp/header.jsp"></c:import>
 <!-- Contents -->
 <section class="body">
 	<article class="contents">
@@ -175,6 +176,6 @@ Image Store 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 �
 	</article>
 </section>
 <!-- Contents 끝 -->
-<%@ include file="../temp/footer.jsp" %>
+<c:import url=""></c:import>
 </body>
 </html>
