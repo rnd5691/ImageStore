@@ -12,4 +12,17 @@
   	<servlet-name>Member</servlet-name>
   	<url-pattern>*.member</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>qna</servlet-name>
+    <servlet-class>com.imagestore.control.QnaController</servlet-class>
+    <init-param>
+    	<param-name>properties</param-name>
+    	<param-value>qna.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>qna</servlet-name>
+    <url-pattern>*.qna</url-pattern>
+  </servlet-mapping>
 </web-app>
