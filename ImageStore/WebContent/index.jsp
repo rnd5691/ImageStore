@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +13,14 @@
 
 </head>
 <body>
-
-<%@include file="./temp/header.jsp" %>
+<c:import url="./WEB-INF/view/temp/header.jsp"></c:import>
 <!-- contents -->
-<div style="width : 900px; height: 900px;"></div>
+<div class="body"></div>
 <!-- contents finish -->
 
 <!-- footer -->
-<%@ include file="./temp/footer.jsp" %>
+
 <!-- footer finish -->
+<c:import url="./WEB-INF/view/temp/footer.jsp"></c:import>
 </body>
 </html>

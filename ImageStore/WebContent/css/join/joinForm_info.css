@@ -1,12 +1,7 @@
 @CHARSET "UTF-8";
-.body{
-	width : 900px;
-	height: 600px;
-	margin: 0 auto;
-}
 .contents{
 	width : 900px;
-	height: 470px;
+	height: 550px;
 	padding-top : 50px;
 	margin : 0 auto;
 }
@@ -22,7 +17,7 @@
 }
 .join_info{
 	width :450px;
-	height: 350px;
+	height: 450px;
 	margin: 0 auto;
 }
 td>span{

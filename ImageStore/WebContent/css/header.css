@@ -1,4 +1,7 @@
 @charset "UTF-8";
+html, body{
+	height: 100%;
+}
 *	{
 	margin: 0;
 	padding: 0;
@@ -52,7 +55,13 @@ header{
 /*header 끝*/
 /* contents 공통 부분 */
 .body{
+	width : 900px;
 	padding-top : 50px;
+	margin : 0 auto;
+	min-height: 100%;
+}
+.push{
+	height: 100px;
 }
 /*footer 시작*/
 footer	{
@@ -60,6 +69,7 @@ footer	{
 	height: 100px;
 	background-color: #83b14e;
 	position: relative;
+	margin-top: -100px;
 }
 
 .footer_wrap	{
