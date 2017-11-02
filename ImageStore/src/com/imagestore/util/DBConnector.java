@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 public class DBConnector {
 	public static Connection getConnect() throws Exception	{
 		//1.로그인 정보
-    	String user="user02";
-    	String password="user02";
+    	String user="imagestore";
+    	String password="imagestore";
     	String url="jdbc:oracle:thin:@localhost:1521:xe";
     	String driver="oracle.jdbc.driver.OracleDriver";
     	//2.드라이버를 메모리에 로딩
