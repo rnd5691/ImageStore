@@ -38,8 +38,4 @@ public class MakePage {
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-	
-	
-	
-	
 }

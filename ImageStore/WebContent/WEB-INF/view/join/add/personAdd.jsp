@@ -16,8 +16,8 @@
 		<td><input type="text" name="name"></td>
 	</tr>
 	<tr>
-		<td>생년월일</td>
-		<td><input type="date" name="birth"></td>
+		<td><span>*</span>생년월일</td>
+		<td><input type="date" name="birth" required="required"></td>
 	</tr>
 	<tr>
 		<td><span>*</span>작가 등록</td>

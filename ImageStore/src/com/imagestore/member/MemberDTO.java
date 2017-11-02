@@ -7,6 +7,7 @@ public class MemberDTO {
 	private String phone;
 	private String email;
 	private String kind;
+	private String token;
 	public String getId() {
 		return id;
 	}
@@ -42,5 +43,11 @@ public class MemberDTO {
 	}
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

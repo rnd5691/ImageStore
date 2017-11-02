@@ -1,6 +1,8 @@
 package com.imagestore.company;
 
-public class CompanyDTO {
+import com.imagestore.member.MemberDTO;
+
+public class CompanyDTO extends MemberDTO{
 	private String company_name;
 	private String company_num;
 	private String company_phone;

@@ -20,16 +20,16 @@ import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
 
 /**
- * Servlet implementation class MemberJoinService
+ * Servlet implementation class CompanyController
  */
-@WebServlet("/MemberJoinService")
-public class MemberController extends HttpServlet {
+@WebServlet("/CompanyController")
+public class CompanyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    HashMap<String, Object> map; //map 선언
+    HashMap<String, Object> map;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberController() {
+    public CompanyController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -71,7 +71,6 @@ public class MemberController extends HttpServlet {
     		}
     	}
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -23,14 +23,9 @@
 			<h1>회원 가입</h1> <h5>계정 선택</h5>
 		</article>
 		<article class="session">
-			<form action="memberInfo.member">
-				<input type="hidden" name="kind" value="company">
-				<button class="btn">기업으로 가입하기</button>
-			</form>
-			<form action="memberInfo.member">
-				<input type="hidden" name="kind" value="person">
-				<button class="btn">개인으로 가입하기</button>
-			</form>
+			<a class="button" href="memberCompany.member">기업으로 가입하기</a>
+			<a class="button" href="memberPerson.member">개인으로 가입하기</a>
+
 			
 		</article>
 	</article>

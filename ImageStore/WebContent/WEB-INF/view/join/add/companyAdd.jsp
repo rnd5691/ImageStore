@@ -9,7 +9,10 @@
 <body>
 	<tr>
 		<td><span>*</span>사업자등록번호</td>
-		<td><input type="text" name="company_num" required="required"></td>
+		<td>
+			<input id="company_num" type="text" name="company_num" required="required">
+			<div id="company_num_check"></div>
+		</td>
 	</tr>
 	<tr>
 		<td><span>*</span>상호명</td>
@@ -19,7 +22,6 @@
 		<td><span>*</span>회사 연락처</td>
 		<td>
 			<input type="text" name="company_phone" required="required">
-			<input type="hidden" name="artist" value="general">
 		</td>
 	</tr>
 </body>

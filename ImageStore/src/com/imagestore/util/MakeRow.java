@@ -1,7 +1,6 @@
 package com.imagestore.util;
 
 public class MakeRow {
-
 	private int startRow;
 	private int lastRow;
 	
@@ -17,6 +16,4 @@ public class MakeRow {
 	public void setLastRow(int lastRow) {
 		this.lastRow = lastRow;
 	}
-	
-	
 }

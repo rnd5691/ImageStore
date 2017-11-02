@@ -1,7 +1,6 @@
 package com.imagestore.util;
 
 public class PageMaker {
-	
 	private int curPage;
 	private int perPage;
 	private int totalCount;

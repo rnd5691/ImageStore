@@ -2,7 +2,9 @@ package com.imagestore.person;
 
 import java.sql.Date;
 
-public class PersonDTO {
+import com.imagestore.member.MemberDTO;
+
+public class PersonDTO extends MemberDTO{
 	private String nickName;
 	private String name;
 	private Date birth;
