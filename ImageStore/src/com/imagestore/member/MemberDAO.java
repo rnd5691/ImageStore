@@ -7,6 +7,32 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class MemberDAO {
+	//로그인을 위한 회원 정보 조회
+		public MemberDTO selectOne(MemberDTO memberDTO) throws Exception{
+			Connection con = DBConnector.getConnect();
+			String sql = "select * from user_info where id=? and pw=? and kind=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, memberDTO.getId());
+			st.setString(2, memberDTO.getPw());
+			st.setString(3, memberDTO.getKind());
+			System.out.println(memberDTO.getId());
+			System.out.println(memberDTO.getPw());
+			System.out.println(memberDTO.getKind());
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				memberDTO.setEmail(rs.getString("email"));
+				memberDTO.setPhone(rs.getString("phone"));
+				memberDTO.setToken(rs.getString("token"));
+				memberDTO.setUser_num(rs.getInt("user_num"));
+			}else {
+				memberDTO = null;
+			}
+			DBConnector.disConnect(rs, st, con);
+			
+			return memberDTO;
+			
+		}
 	//회원 번호 가져오기
 	public int searchUserNum(MemberDTO memberDTO, Connection con) throws Exception{
 		String sql = "select user_num from user_info where id=? and pw=? and kind=?";

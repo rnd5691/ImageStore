@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+html, body { 
+	
+	height: 100%; 
+	
+} 
+
+.allbody	{
+	width: 100%;
+	height: auto;
+	min-height:100%;
+}
+
+.totalbutton	{
+	width: 197px;
+	height: auto;
+	min-height:100%;
+	float: left;
+}
+
+.totalbody	{
+	width: 702px;
+	height: auto;
+	min-height:100%;
+	margin: 0 auto;
+}
+
+.bodytitle	{
+	border-bottom: 1px solid #747474;
+	color:  #83b14e;
+	
+}
+
+h1	{
+	display: inline-block;
+}
+
+h4	{
+	display: inline-block;
+}
+
+table, tr, td	{
+	border-collapse: collapse;
+	border: 1px solid #dcdcdc;
+}
+
+.table	{
+	margin-top: 30px;
+}
+
+.tdtable1	{
+	width: 150px;
+	text-align: center;
+	background-color: #83b14e;
+	color: white;
+	font-weight: bolder;
+}
+
+.tdtable2	{
+	width: 300px;
+	text-align: center;
+	background-color: #83b14e;
+	color: white;
+	font-weight: bolder;
+}
+
+#btn	{
+	float: right;
+}
+
+.tdtable3	{
+	text-align: center;
+}
+

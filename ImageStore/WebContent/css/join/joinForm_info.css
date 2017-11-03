@@ -14,11 +14,18 @@
 .title>h1, .title>h5{
 	display: inline-block;
 	margin : 0;
+	color : #83b14e;
 }
 .join_info{
 	width :450px;
 	height: 450px;
 	margin: 0 auto;
+}
+#id_check>h5, #pw_check>h5, #pwch_check>h5{
+	margin: 0;
+}
+#pw_check>h5, #pwch_check>h5{
+	margin-top: 5px;
 }
 td>span{
 	color : red;

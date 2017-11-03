@@ -6,6 +6,7 @@ html, body{
 	margin: 0;
 	padding: 0;
 }
+
 a:link, a:visited{
 	/* 링크  밑줄 없애기, 링크 색상 지정 */
 	color : black;
@@ -52,6 +53,17 @@ header{
 	display: inline-block;
 	
 }
+.login{
+	background-color: white;
+	border : 0px;
+}
+.modal-body>input, .kind{
+	margin-bottom: 5px;
+}
+.idpw{
+	width : 100%;
+	height: 30px;
+}
 /*header 끝*/
 /* contents 공통 부분 */
 .body{
@@ -62,6 +74,9 @@ header{
 }
 .push{
 	height: 100px;
+}
+a{
+	color : black!import;
 }
 /*footer 시작*/
 footer	{
