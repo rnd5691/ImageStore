@@ -38,10 +38,10 @@
 					      <div class="modal-content">
 					      	
 						    <div class="modal-header">
-						    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 						        <h4 class="modal-title">로그인</h4>
+						    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 						    </div>
-						    <form action="member/memberLogin.member">
+						    <form action="<%=request.getContextPath() %>/member/memberLogin.member">
 						    	<div class="modal-body">
 						    		<div class="kind">
 							    		<input type="radio" name="kind" value="company" required="required"> 기업
