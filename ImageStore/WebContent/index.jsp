@@ -77,7 +77,7 @@
 <div class="body">
 
 <!-- 메인슬라이더 -->
-<div style="width : 100%; height: 400px; padding-top :50px;">
+<div style="width : 100%; height: 500px;">
 <div class="searh_main">
 	<c:forEach begin="1" end="20" var="i">
 		<div class="pic"><img id="slider${i}"></div>

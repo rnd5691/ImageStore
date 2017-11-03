@@ -1,4 +1,10 @@
 @charset "UTF-8";
+.body {
+	width:100%;
+	padding-top : 50px;
+	margin : 0 auto;
+	min-height: 100%;
+}
 .search_img img {
 	width: 100%;
 	height: 600px;
@@ -63,7 +69,7 @@
 }
 .searh_main img {
 	min-width: 100%;
-	height: 400px;
+	height: 500px;
 }
 .search-text {
 	position: relative;
