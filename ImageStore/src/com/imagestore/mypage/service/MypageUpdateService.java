@@ -1,4 +1,4 @@
-package com.imagestore.member.service;
+package com.imagestore.mypage.service;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
@@ -17,77 +18,65 @@ import com.imagestore.person.PersonDAO;
 import com.imagestore.person.PersonDTO;
 import com.imagestore.util.DBConnector;
 
-public class MemberInsertService implements Action {
+public class MypageUpdateService implements Action {
 
 	@Override
-	public ActionFoward doProcess(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+	public ActionFoward doProcess(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		ActionFoward actionFoward = new ActionFoward();
-		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String kind = request.getParameter("kind");
-		System.out.println("id : "+id+", pw : "+pw+", phone : "+phone+", email : "+email+", kind : "+kind);
-		Connection con = null;
+		HttpSession session = request.getSession();
 		MemberDAO memberDAO = new MemberDAO();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		
+		Connection con = null;
 		int result = 0;
+		memberDTO.setPw(request.getParameter("pw"));
+		memberDTO.setPhone(request.getParameter("phone"));
+		memberDTO.setEmail(request.getParameter("email"));
 		
 		try{
 			con = DBConnector.getConnect();
 			con.setAutoCommit(false);
-			MemberDTO memberDTO = new MemberDTO();
+			result = memberDAO.update(memberDTO, con);
 			
-			memberDTO.setId(id);
-			memberDTO.setPw(pw);
-			memberDTO.setPhone(phone);
-			memberDTO.setEmail(email);
-			memberDTO.setKind(kind);
-
-			result = memberDAO.insert(memberDTO, con);
-			
-			int user_num = memberDAO.searchUserNum(memberDTO, con);
-			
-			if(kind.equals("company")){
-				CompanyDTO companyDTO = new CompanyDTO();
+			if(memberDTO.getKind().equals("company")){
 				CompanyDAO companyDAO = new CompanyDAO();
+				CompanyDTO companyDTO = new CompanyDTO();
 				
-				
+				companyDTO.setUser_num(memberDTO.getUser_num());
 				companyDTO.setCompany_name(request.getParameter("company_name"));
-				companyDTO.setUser_num(user_num);
 				companyDTO.setCompany_num(request.getParameter("company_num"));
 				companyDTO.setCompany_phone(request.getParameter("company_phone"));
 				
-				result = companyDAO.insert(companyDTO, con);
+				result = companyDAO.update(companyDTO, con);
 				
 				con.commit();
 			}else{
-				PersonDTO personDTO = new PersonDTO();
 				PersonDAO personDAO = new PersonDAO();
+				PersonDTO personDTO = new PersonDTO();
 				
-				personDTO.setNickName(request.getParameter("nickname"));
-				personDTO.setUser_num(user_num);
+				personDTO.setUser_num(memberDTO.getUser_num());
 				personDTO.setName(request.getParameter("name"));
 				personDTO.setBirth(Date.valueOf(request.getParameter("birth")));
 				personDTO.setArtist(request.getParameter("artist"));
 				
-				result = personDAO.insert(personDTO, con);
+				result = personDAO.upload(personDTO, con);
 				
 				con.commit();
 			}
 		}catch(Exception e){
-			con.rollback();
 			e.printStackTrace();
+			con.rollback();
 		}finally {
 			con.setAutoCommit(true);
 		}
 		
+		String message = "회원 정보 수정에 실패 하셨습니다.";
 		if(result>0){
-			request.setAttribute("message", "회원 가입에 성공 하셨습니다.");
-		}else{
-			request.setAttribute("message", "회원 가입에 실패 하셨습니다.");
+			message = "회원 정보 수정을 성공 하셨습니다.";
 		}
-		request.setAttribute("path", "../index.jsp");
+		
+		request.setAttribute("message", message);
+		request.setAttribute("path", "mypageMyInfo.mypage");
 		
 		actionFoward.setCheck(true);
 		actionFoward.setPath("../WEB-INF/view/common/result.jsp");

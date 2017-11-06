@@ -2,8 +2,64 @@ package com.imagestore.person;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.imagestore.util.DBConnector;
 
 public class PersonDAO {
+	//작가인지 아닌지 확인
+	public String checkArt(int user_num) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select artist from person where user_num=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, user_num);
+		
+		ResultSet rs = st.executeQuery();
+		
+		String artist = null;
+		if(rs.next()){
+			artist = rs.getString("artist");
+		}
+		
+		return artist;
+	}
+	//수정 업로드
+	public int upload(PersonDTO personDTO, Connection con) throws Exception{
+		String sql = "update person set name=?, birth=?, artist=? where user_num=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, personDTO.getName());
+		st.setDate(2, personDTO.getBirth());
+		st.setString(3, personDTO.getArtist());
+		st.setInt(4, personDTO.getUser_num());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		
+		return result;
+	}
+	public PersonDTO selectOne(int user_num) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select * from person where user_num=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, user_num);
+		ResultSet rs = st.executeQuery();
+		PersonDTO personDTO = null;
+		if(rs.next()){
+			personDTO = new PersonDTO();
+			personDTO.setNickName(rs.getString("nickname"));
+			personDTO.setUser_num(user_num);
+			personDTO.setName(rs.getString("name"));
+			personDTO.setBirth(rs.getDate("birth"));
+			personDTO.setArtist(rs.getString("artist"));
+		}
+		DBConnector.disConnect(rs, st, con);
+		
+		return personDTO;
+	}
+	//회원가입
 	public int insert(PersonDTO personDTO, Connection con) throws Exception{
 		String sql = "insert into person values(?, ?, ?, ?, ?)";
 		

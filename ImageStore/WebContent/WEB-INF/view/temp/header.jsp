@@ -10,6 +10,7 @@
 				<li>QnA</li>
 				<li>무명작가</li>
 			</ul>
+			<a href="<%=request.getContextPath()%>/index.jsp"><img class="logo" align="middle" alt="logo" src="<%=request.getContextPath()%>/images/logo.png"></a>
 			<ul class="header_join">
 				<li>Pay Info</li>
 				<c:choose>
@@ -25,7 +26,7 @@
 					</c:when>
 					<c:when test="${sessionScope.member ne null}">
 						<li><a href="<%=request.getContextPath()%>/member/memberLogout.member">로그아웃</a></li>
-						<li><a href="#">MYPAGE</a></li>
+						<li><a href="<%=request.getContextPath()%>/mypage/mypageMyInfo.mypage">MYPAGE</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
