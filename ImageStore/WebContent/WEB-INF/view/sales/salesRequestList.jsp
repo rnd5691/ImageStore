@@ -6,15 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../../../css/header.css" rel="stylesheet">
-<link href="../../../css/sales/salesRequestList.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/mypage/mypage.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/sales/salesRequestList.css" rel="stylesheet">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!-- header start -->
-<c:import url="../WEB-INF/view/temp/header.jsp"></c:import>
+<c:import url="../temp/header.jsp"></c:import>
 <!-- header finish -->
 
 <!-- contents start -->
@@ -26,10 +27,11 @@
 <div class="totalbutton">
 	<div class="btn-group-vertical">
 		<button type="button" class="btn btn-default">MY PAGE</button>
-		<button type="button" class="btn btn-default">내 정보</button>
-		<button type="button" class="btn btn-default">내 작품 판매승인 요청 현황</button>
-		<button type="button" class="btn btn-default">현재 판매 중인 내 작품</button>
-		<button type="button" class="btn btn-default">작품 별 수익 현황</button>
+		<a class="btn btn-default" hef="${pageContext.request.contextPath}/mapageMyInfo.mapage">내 정보</a>
+				<button type="button" class="btn btn-default">구매 목록</button>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestList.sales">내 작품 판매승인 요청 현황</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestNow.sales">현재 판매중이 내 작품</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestMoney.sales">작품 별 수익 현황</a>
 	</div>
 </div>
 <div class="totalbody">
@@ -44,16 +46,19 @@
 			<td class="tdtable1">등록일자</td>
 			<td class="tdtable1">승인현황</td>
 		</tr>
+		<%-- <c:forEach items="${requestScope.list}" var="dto"> --%>
 		<tr>
 			<td class="tdtable3">1</td>
-			<td><a href="./salesRequestView.jsp">1</a></td>
+			<td><a href="../sales/salesRequestView.sales">1</a></td>
 			<td class="tdtable3">1</td>
 			<td class="tdtable3">1</td>
 			<td class="tdtable3">1</td>
 		</tr>		
+		<%-- </c:forEach> --%>
 	</table>
-	<button id= "btn" class="btn btn-default">내 작품 올리기</button>
-	<div class="text-center">
+	<!-- <button id= "btn" class="btn btn-default">내 작품 올리기</button> -->
+	<a class="btn btn-default" href="../sales/salesRequestWrite.sales">내 작품 올리기</a>
+	<%-- <div class="text-center">
 	<ul class="pagination">
 		<li><a href="./${requestScope.board}List.${requestScope.board}?curPage=${1}">[맨 처음으로]</a></li>
 		<c:if test="${page.curBlock>1}">
@@ -67,7 +72,7 @@
 		</c:if>
 		<li><a href="./${requestScope.board}List.${requestScope.board}?curPage="${page.totlaPage}">[맨 마지막]</a></li>
 	</ul>
-	</div>
+	</div> --%>
 </div>
 </div>
 <div class="push"></div>
@@ -77,7 +82,7 @@
 <!-- contents finish -->
 
 <!-- footer start -->
-<c:import url="../WEB-INF/view/temp/footer.jsp"></c:import>
+<c:import url="../temp/footer.jsp"></c:import>
 <!-- footer finish -->
 </body>
 </html>

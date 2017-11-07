@@ -130,9 +130,11 @@
 			<a id="select"href="mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
 			<button type="button" class="btn btn-default">구매 목록</button>
 			<c:if test="${requestScope.artist eq 'artist'}">
-				<button type="button" class="btn btn-default">내 작품 판매승인 요청 현황</button>
-				<button type="button" class="btn btn-default">현재 판매 중인 내 작품</button>
-				<button type="button" class="btn btn-default">작품 별 수익 현황</button>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestList.sales">내 작품 판매승인 요청 현황</a>
+				<!-- <button type="button" class="btn btn-default">현재 판매 중인 내 작품</button> -->
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestNow.sales">현재 판매중이 내 작품</a>
+				<!-- <button type="button" class="btn btn-default">작품 별 수익 현황</button> -->
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestMoney.sales">작품 별 수익 현황</a>
 			</c:if>
 		</div>
 	</div>
