@@ -10,6 +10,7 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class QnaDAO {
+	
 	public int update(QnaDTO qnaDTO) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "update qna set title=?, contents=? where qna_seq=?";
@@ -123,13 +124,16 @@ public class QnaDAO {
 	}
 	public int getTotalCount(String kind, String search) throws Exception{
 		Connection con = DBConnector.getConnect();
-		String sql = "select count(nvl(qna_seq, 0)) from qna where "+kind+" like ?";
+		String sql = "select nvl(count(qna_seq), 0) from qna where "+kind+" like ?";
 		PreparedStatement st = con.prepareStatement(sql);
+		
 		st.setString(1, "%"+search+"%");
 		ResultSet rs = st.executeQuery();
 		rs.next();
 		int result = rs.getInt(1);
+		
 		DBConnector.disConnect(rs, st, con);
+		System.out.println("result : "+result);
 		return result;
 	}
 }

@@ -1,7 +1,6 @@
 package com.imagestore.util;
 
 public class MakePage {
-
 	private int curBlock;
 	private int totalBlock;
 	private int startNum;
@@ -38,4 +37,9 @@ public class MakePage {
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
+	
+	
+	
+
 }
+

@@ -12,7 +12,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/qna/qnaList.css" rel="stylesheet">
-
 </head>
 <body>
 <!-- header start -->
@@ -51,21 +50,24 @@
 				</c:forEach>
 			</table>
 			
-			<div class="paging">
-				<ul class="pagination">
-					<c:if test="${makePage.curBlock>1}">
-						<li><a href="./qnaList.qna?curPage=1">&lt;&lt;</a></li>
-						<li><a href="./qnaList.qna?curPage=${makePage.startNum-1}">[이전]</a></li>
-					</c:if>
-					<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-						<li><a href="./qnaList.qna?curPage${i}">${i}</a></li>
-					</c:forEach>
-					<c:if test="${makePage.curBlock < makePage.totalBlock}">
-						<li><a href="./qnaList.qna?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
-						<li><a href="./qnaList.qna?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
-					</c:if>
-				</ul>
-			</div>
+			<c:if test="${makePage.totalPage > 0}">
+				<div class="paging">
+					<ul class="pagination">
+						<c:if test="${makePage.curBlock>1}">
+							<li><a href="./qnaList.qna?curPage=1&kind=${requestScope.kind}&search=${requestScope.search}">&lt;&lt;</a></li>
+							<li><a href="./qnaList.qna?curPage=${makePage.startNum-1}&kind=${requestScope.kind}&search=${requestScope.search}">[이전]</a></li>
+						</c:if>
+						
+						<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
+							<li><a href="./qnaList.qna?curPage=${i}&kind=${requestScope.kind}&search=${requestScope.search}">${i}</a></li>
+						</c:forEach>
+						<c:if test="${makePage.curBlock < makePage.totalBlock}">
+							<li><a href="./qnaList.qna?curPage=${requestScope.makePage.getLastNum()+1}&kind=${requestScope.kind}&search=${requestScope.search}">[다음]</a></li>
+							<li><a href="./qnaList.qna?curPage=${makePage.totalPage}&kind=${requestScope.kind}&search=${requestScope.search}">&gt;&gt;</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</c:if>
 			<c:if test="${sessionScope.member ne null}">
 				<a  id="btn" href="./qnaWrite.qna" class="btn btn-default">WRITE</a>
 			</c:if>	

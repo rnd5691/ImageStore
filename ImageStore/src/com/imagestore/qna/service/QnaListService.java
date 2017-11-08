@@ -10,6 +10,7 @@ import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
 import com.imagestore.qna.QnaDAO;
 import com.imagestore.qna.QnaDTO;
+import com.imagestore.util.MakeRow;
 import com.imagestore.util.PageMaker;
 
 public class QnaListService implements Action {
@@ -19,12 +20,12 @@ public class QnaListService implements Action {
 		ActionFoward actionFoward = new ActionFoward();
 		
 		QnaDAO qnaDAO = new QnaDAO();
-		int curPage = 1;
-		try{
+		int curPage=1;
+		try {
 			curPage = Integer.parseInt(request.getParameter("curPage"));
-		}catch(Exception e){
+		}catch(Exception e) {
+			curPage = 1;
 		}
-		
 		String kind = request.getParameter("kind");
 		String search = request.getParameter("search");
 		
@@ -35,13 +36,13 @@ public class QnaListService implements Action {
 			search="";
 		}
 		
-		int totalCount = 0;
-		
 		try{
-			totalCount = qnaDAO.getTotalCount(kind, search);
+			int totalCount = qnaDAO.getTotalCount(kind, search);
 			PageMaker pageMaker = new PageMaker(curPage, totalCount);
 			List<QnaDTO> ar = qnaDAO.selectList(pageMaker.getMakeRow(), kind, search);
 			request.setAttribute("list", ar);
+			request.setAttribute("kind", kind);
+			request.setAttribute("search", search);
 			request.setAttribute("makePage", pageMaker.getMakePage());
 		}catch(Exception e){
 			e.printStackTrace();

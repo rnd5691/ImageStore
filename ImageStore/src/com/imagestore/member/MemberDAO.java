@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class MemberDAO {
+	
 	//수정 정보 업로드
 	public int update(MemberDTO memberDTO, Connection con) throws Exception{
 		String sql = "update user_info set pw=?, phone=?, email=? where user_num=?";
@@ -87,7 +88,7 @@ public class MemberDAO {
 		boolean check = true;
 		Connection con = DBConnector.getConnect();
 		
-		String sql = "select * from user_info where id=? and session_check='false'";
+		String sql = "select * from user_info where id=? and session_check='N'";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, id);

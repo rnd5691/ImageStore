@@ -7,10 +7,10 @@
 			<ul class="header_menu">
 				<li>이미지</li>
 				<li>동영상</li>
-				<li><a href="<%=request.getContextPath()%>/qna/qnaList.qna">Q&A</a></li>
+				<li><a href="${pageContext.request.contextPath}/qna/qnaList.qna">Q&A</a></li>
 				<li>무명작가</li>
 			</ul>
-			<a href="<%=request.getContextPath()%>/index.jsp"><img class="logo" align="middle" alt="logo" src="<%=request.getContextPath()%>/images/logo.png"></a>
+			<a href="${pageContext.request.contextPath}/index.jsp"><img class="logo" align="middle" alt="logo" src="<%=request.getContextPath()%>/images/logo.png"></a>
 			<ul class="header_join">
 				<li>Pay Info</li>
 				<c:choose>
@@ -22,11 +22,11 @@
 							
 							</div>
 						</li>
-						<li><a href="<%=request.getContextPath() %>/member/memberAgreement.member">JOIN</a></li>
+						<li><a href="${pageContext.request.contextPath}/member/memberAgreement.member">JOIN</a></li>
 					</c:when>
 					<c:when test="${sessionScope.member ne null}">
-						<li><a href="<%=request.getContextPath()%>/member/memberLogout.member">로그아웃</a></li>
-						<li><a href="<%=request.getContextPath()%>/mypage/mypageMyInfo.mypage">MYPAGE</a></li>
+						<li><a href="${pageContext.request.contextPath}/member/memberLogout.member">로그아웃</a></li>
+						<li><a href="${pageContext.request.contextPath}/mypage/mypageMyInfo.mypage">MYPAGE</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
@@ -42,7 +42,7 @@
 						        <h4 class="modal-title">로그인</h4>
 						    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 						    </div>
-						    <form action="<%=request.getContextPath() %>/member/memberLogin.member">
+						    <form action="${pageContext.request.contextPath}/member/memberLogin.member">
 						    	<div class="modal-body">
 						    		<div class="kind">
 							    		<input type="radio" name="kind" value="company" required="required"> 기업

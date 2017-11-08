@@ -6,6 +6,7 @@
 	width: 197px;
 	height: auto;
 	min-height:100%;
+	float : left;
 	margin-top: 8px;
 	margin-right: 10px;
 	
@@ -32,7 +33,7 @@
 	width: 600px;
 	min-height:100%;
 	margin: 0 auto;
-	margin-left: 220px;
+	display: inline-block;
 }
 
 .title{
