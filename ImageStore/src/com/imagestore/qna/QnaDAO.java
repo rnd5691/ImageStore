@@ -10,25 +10,8 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class QnaDAO {
-	
-	public int delete(int qna_seq) throws Exception	{
+	public int update(QnaDTO qnaDTO) throws Exception{
 		Connection con = DBConnector.getConnect();
-		
-		String sql = "delete qna where qna_seq=?";
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		st.setInt(1, qna_seq);
-		int result = st.executeUpdate();
-		
-		DBConnector.disConnect(st, con);
-		
-		return result;
-		
-	}
-	
-	public int update(QnaDTO qnaDTO) throws Exception	{
-		Connection con = DBConnector.getConnect();
-		
 		String sql = "update qna set title=?, contents=? where qna_seq=?";
 		PreparedStatement st = con.prepareStatement(sql);
 		
@@ -40,17 +23,36 @@ public class QnaDAO {
 		
 		DBConnector.disConnect(st, con);
 		
-		return result;
+		 return result;
 	}
-	
-	public int insert(QnaDTO qnaDTO) throws Exception	{
+	public int delete(int qna_seq) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "delete qna where qna_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, qna_seq);
+		
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		
+		return result;
+		
+	}
+	public int insert(QnaDTO qnaDTO, String kind) throws Exception	{
 		Connection con = DBConnector.getConnect();
 		
-		String sql = "insert into qna values(qna_seq.nextval,?,?,?,sysdate,0,qna_seq.currval,0,0)";
+		String sql = "insert into qna values(qna_seq.nextval,?,?,?,?,sysdate,'답변 미완료',NULL)";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, qnaDTO.getTitle());
-		st.setString(2, qnaDTO.getNickname());
-		st.setString(3, qnaDTO.getContents());
+		if(kind.equals("company")){
+			st.setString(2, null);
+			st.setString(3, qnaDTO.getWriter());
+		}else{
+			st.setString(2, qnaDTO.getWriter());
+			st.setString(3, null);
+		}
+		st.setString(4, qnaDTO.getContents());
 		
 		int result = st.executeUpdate();
 		
@@ -71,7 +73,11 @@ public class QnaDAO {
 			qnaDTO = new QnaDTO();
 			qnaDTO.setQna_seq(rs.getInt("qna_seq"));
 			qnaDTO.setTitle(rs.getString("title"));
-			qnaDTO.setNickname(rs.getString("nickname"));
+			if(rs.getString("company_name")==null){
+				qnaDTO.setWriter(rs.getString("nickname"));
+			}else{
+				qnaDTO.setWriter(rs.getString("company_name"));
+			}
 			qnaDTO.setContents(rs.getString("contents"));
 			qnaDTO.setReg_date(rs.getDate("reg_date"));
 			qnaDTO.setReply_check(rs.getString("reply_check"));
@@ -79,27 +85,14 @@ public class QnaDAO {
 		}
 		
 		DBConnector.disConnect(rs, st, con);
+		
 		return qnaDTO;
 	}
-	
-	public int getTotalCount(String kind, String search) throws Exception{
-		Connection con = DBConnector.getConnect();
-		String sql = "select count(nvl(qna_seq, 0)) from qna where "+kind+" like ?";
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, "%"+search+"%");
-		ResultSet rs = st.executeQuery();
-		rs.next();
-		int result = rs.getInt(1);
-		DBConnector.disConnect(rs, st, con);
-		return result;
-	}
-
 	public List<QnaDTO> selectList(MakeRow makeRow, String kind, String search) throws Exception	{
 		Connection con = DBConnector.getConnect();
-		
 		String sql = "select * from "
 			+	"(select rownum R, Q.* from "
-			+   "(select * from qna where "+kind+" like ? order by ref desc, step asc) Q) "
+			+   "(select * from qna where "+kind+" like ? order by qna_seq desc) Q) "
 			+   "where R between ? and ?";
 		PreparedStatement st = con.prepareStatement(sql);
 		
@@ -113,7 +106,11 @@ public class QnaDAO {
 			QnaDTO qnaDTO = new QnaDTO();
 			qnaDTO.setQna_seq(rs.getInt("qna_seq"));
 			qnaDTO.setTitle(rs.getString("title"));
-			qnaDTO.setNickname(rs.getString("nickname"));
+			if(rs.getString("company_name")==null){
+				qnaDTO.setWriter(rs.getString("nickname"));
+			}else{
+				qnaDTO.setWriter(rs.getString("company_name"));
+			}
 			qnaDTO.setContents(rs.getString("contents"));
 			qnaDTO.setReg_date(rs.getDate("reg_date"));
 			qnaDTO.setReply_check(rs.getString("reply_check"));
@@ -123,5 +120,16 @@ public class QnaDAO {
 		DBConnector.disConnect(rs, st, con);
 		return ar;
 		
+	}
+	public int getTotalCount(String kind, String search) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select count(nvl(qna_seq, 0)) from qna where "+kind+" like ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, "%"+search+"%");
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		int result = rs.getInt(1);
+		DBConnector.disConnect(rs, st, con);
+		return result;
 	}
 }

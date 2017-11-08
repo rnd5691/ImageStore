@@ -7,7 +7,7 @@
 			<ul class="header_menu">
 				<li>이미지</li>
 				<li>동영상</li>
-				<li>QnA</li>
+				<li><a href="<%=request.getContextPath()%>/qna/qnaList.qna">Q&A</a></li>
 				<li>무명작가</li>
 			</ul>
 			<a href="<%=request.getContextPath()%>/index.jsp"><img class="logo" align="middle" alt="logo" src="<%=request.getContextPath()%>/images/logo.png"></a>
@@ -47,6 +47,7 @@
 						    		<div class="kind">
 							    		<input type="radio" name="kind" value="company" required="required"> 기업
 							    		<input type="radio" name="kind" value="person" required="required"> 개인
+							    		<input class="admin" type="radio" name="kind" value="admin" checked="checked">
 						    		</div>
 						          	<input class="idpw" type="text" name="id" required="required" placeholder="아이디를 입력"><br/>
 						         	<input class="idpw" type="password" name="pw" required="required" placeholder="비밀번호를 입력">

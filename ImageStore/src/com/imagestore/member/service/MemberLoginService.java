@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
+import com.imagestore.company.CompanyDAO;
 import com.imagestore.member.MemberDAO;
 import com.imagestore.member.MemberDTO;
+import com.imagestore.person.PersonDAO;
 
 public class MemberLoginService implements Action {
 
@@ -28,6 +30,15 @@ public class MemberLoginService implements Action {
 			memberDTO = memberDAO.selectOne(memberDTO);
 			if(memberDTO != null) {
 				session.setAttribute("member", memberDTO);
+				String writer = null;
+				if(memberDTO.getKind().equals("company")){
+					CompanyDAO companyDAO = new CompanyDAO();
+					writer = companyDAO.selectWriter(memberDTO.getUser_num());
+				}else{
+					PersonDAO personDAO = new PersonDAO();
+					writer = personDAO.selectWriter(memberDTO.getUser_num());
+				}
+				session.setAttribute("writer", writer);
 				message = "로그인 성공";
 			}
 			
@@ -37,7 +48,11 @@ public class MemberLoginService implements Action {
 		}
 		
 		request.setAttribute("message", message);
-		request.setAttribute("path", "../index.jsp");
+		if(memberDTO.getKind().equals("admin")){
+			request.setAttribute("path", "memberAdminLogin.member");
+		}else{
+			request.setAttribute("path", "../index.jsp");			
+		}
 		
 		actionFoward.setCheck(true);
 		actionFoward.setPath("../WEB-INF/view/common/result.jsp");

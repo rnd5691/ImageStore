@@ -7,6 +7,26 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class PersonDAO {
+	//작성자
+	public String selectWriter(int user_num) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select nickname from person where user_num=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, user_num);
+		
+		ResultSet rs = st.executeQuery();
+		
+		String writer = null;
+		
+		if(rs.next()){
+			writer = rs.getString("nickname");
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+		
+		return writer;
+	}
 	//작가인지 아닌지 확인
 	public String checkArt(int user_num) throws Exception{
 		Connection con = DBConnector.getConnect();

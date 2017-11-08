@@ -7,6 +7,25 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class CompanyDAO {
+	//작성자
+	public String selectWriter(int user_num) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select company_name from company where user_num=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, user_num);
+		
+		ResultSet rs = st.executeQuery();
+		
+		String writer = null;
+		if(rs.next()){
+			writer = rs.getString("company_name");
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+		
+		return writer;
+	}
 	//업로드 부분
 	public int update(CompanyDTO companyDTO, Connection con) throws Exception{
 		String sql = "update company set company_name=?, company_num=?, company_phone=? where user_num=?";

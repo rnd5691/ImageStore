@@ -79,6 +79,9 @@ header{
 .modal-content>form{
 	width : 100%;
 }
+.admin{
+	display: none;
+}
 /*header 끝*/
 /* contents 공통 부분 */
 .body{

@@ -5,8 +5,7 @@ import java.util.Date;
 public class QnaDTO {
 	private int qna_seq;
 	private String title;
-	private String nickname;
-	private String company;
+	private String writer;
 	private String contents;
 	private Date reg_date;
 	private String reply_check;
@@ -23,18 +22,6 @@ public class QnaDTO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getCompany() {
-		return company;
-	}
-	public void setCompany(String company) {
-		this.company = company;
 	}
 	public String getContents() {
 		return contents;
@@ -59,6 +46,12 @@ public class QnaDTO {
 	}
 	public void setReply(String reply) {
 		this.reply = reply;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	
 	
