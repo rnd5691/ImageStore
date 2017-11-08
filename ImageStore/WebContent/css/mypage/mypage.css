@@ -6,7 +6,6 @@
 	width: 197px;
 	height: auto;
 	min-height:100%;
-	float : left;
 	margin-top: 8px;
 	margin-right: 10px;
 	
@@ -33,7 +32,7 @@
 	width: 600px;
 	min-height:100%;
 	margin: 0 auto;
-	display: inline-block;
+	margin-left: 220px;
 }
 
 .title{
@@ -41,11 +40,12 @@
 	height: 45px;
 	margin-bottom : 10px;
 	border-bottom: 1px solid #747474;
+	color : #83b14e;
 }
 .title>h1, .title>h5{
 	display: inline-block;
 	margin : 0;
-	color : #83b14e;
+	
 }
 #select{
 	background-color: #83b14e;

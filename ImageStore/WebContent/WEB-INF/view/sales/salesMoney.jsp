@@ -27,7 +27,7 @@
 		<div class="btn-group-vertical">
 			<div class="btn-group-vertical">
 			<div class="mypage">MY PAGE</div>
-			<a href="mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
+			<a href="${pageContext.request.contextPath}/mypage/mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
 			<a class="btn btn-default" href="${pageContext.request.contextPath}/buy/buyList.buy">구매 목록</a>
 			<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestList.sales">내 작품 판매승인 요청 현황</a>
 			<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestNow.sales">현재 판매 중인 내 작품</a>

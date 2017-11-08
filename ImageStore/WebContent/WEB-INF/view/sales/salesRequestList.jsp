@@ -11,6 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/mypage/mypage.css" rel="stylesheet">
+<link href="../css/sales/salesRequestList.css" rel="stylesheet">
 </head>
 <body>
 <!-- header start -->
@@ -23,16 +24,15 @@
 <div class="body">
 
 <div class="totalbutton">
-	<div class="totalbutton">
-		<div class="btn-group-vertical">
-			<div class="mypage">MY PAGE</div>
-			<a href="${pageContext.request.contextPath}/mypage/mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
-			<a class="btn btn-default" href="${pageContext.request.contextPath}/buy/buyList.buy">구매 목록</a>
-			<a id="select" class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestList.sales">내 작품 판매승인 요청 현황</a>
-			<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestNow.sales">현재 판매 중인 내 작품</a>
-			<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestMoney.sales">작품 별 수익 현황</a>
-		</div>
+	<div class="btn-group-vertical">
+		<div class="mypage">MY PAGE</div>
+		<a href="${pageContext.request.contextPath}/mypage/mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/buy/buyList.buy">구매 목록</a>
+		<a id="select" class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestList.sales">내 작품 판매승인 요청 현황</a>
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestNow.sales">현재 판매 중인 내 작품</a>
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestMoney.sales">작품 별 수익 현황</a>
 	</div>
+	
 </div>
 <div class="totalbody">
 	<div class="title">
@@ -46,7 +46,7 @@
 			<td class="tdtable1">등록일자</td>
 			<td class="tdtable1">승인현황</td>
 		</tr>
-		<c:forEach items="${requestScope.list}" var="dto"> --%>
+		<c:forEach items="${requestScope.list}" var="dto">
 		<tr>
 			<td class="tdtable3">${dto.work_seq}</td>
 			<td>${dto.work}</td>
@@ -57,7 +57,7 @@
 		</c:forEach> 
 	</table>
 	<!-- <button id= "btn" class="btn btn-default">내 작품 올리기</button> -->
-	<a class="btn btn-default" href="../sales/salesRequestWrite.sales">내 작품 올리기</a>
+	<a id="btn" class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestWrite.sales">내 작품 올리기</a>
 	<div class="text-center">
 	<ul class="pagination">
 		<li><a href="./${requestScope.board}RequestList.${requestScope.board}?curPage=${1}">[맨 처음으로]</a></li>
