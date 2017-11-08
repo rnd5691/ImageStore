@@ -5,41 +5,10 @@ html, body	{
 	
 }
 
-.frm	{
+.imagebody	{
 	width: 100%;
 	height: auto;
-	min-height: 100%;	
-}
-
-.allbody	{
-	width: 100%;
-	height: auto;
-	min-height: 100%;
-}
-
-.buttongroup	{
-	width: 190px;
-	height: auto;
-	
-	float: left;
-}
-
-.btn	{
-	width: 100%;
-	display: inline-block;
-}
-
-.frm	{
-	height: auto;
-}
-
-.nowbody	{
-	width: 900px;
-	height: auto;
-	
-	float: left;
-	margin-left: 140px;
-	
+	float: right;
 }
 
 .nowtitle	{
@@ -48,7 +17,7 @@ html, body	{
 }
 
 table	{
-	margin-top: 30px;
+	margin-top: 30px;S
 }
 
 h1	{
@@ -60,7 +29,7 @@ h4	{
 }
 
 
-.images	{
+.images1	{
 	width: 200px;
 	height: 200px;
 }
