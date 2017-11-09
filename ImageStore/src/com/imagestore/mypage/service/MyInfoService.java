@@ -28,7 +28,7 @@ public class MyInfoService implements Action {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("artist", artist);
+			session.setAttribute("artist", artist);
 		}
 		actionFoward.setCheck(true);
 		actionFoward.setPath("../WEB-INF/view/MYPAGE/my_info.jsp");

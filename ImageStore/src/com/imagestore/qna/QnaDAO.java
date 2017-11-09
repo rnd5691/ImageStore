@@ -10,7 +10,18 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class QnaDAO {
-	
+	public int replyUpdate(QnaDTO qnaDTO) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "update qna set reply_check='답변 완료', reply=? where qna_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, qnaDTO.getReply());
+		st.setInt(2, qnaDTO.getQna_seq());
+		
+		int result = st.executeUpdate();
+		
+		return result;
+	}
 	public int update(QnaDTO qnaDTO) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "update qna set title=?, contents=? where qna_seq=?";
@@ -89,6 +100,40 @@ public class QnaDAO {
 		
 		return qnaDTO;
 	}
+	public List<QnaDTO> adminSelectList(MakeRow makeRow, String kind, String search) throws Exception	{
+		Connection con = DBConnector.getConnect();
+		String sql = "select * from "
+			+	"(select rownum R, Q.* from "
+			+   "(select * from qna where reply_check='답변 미완료' and "+kind+" like ? order by qna_seq desc) Q) "
+			+   "where R between ? and ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, "%"+search+"%");
+		st.setInt(2, makeRow.getStartRow());
+		st.setInt(3, makeRow.getLastRow());
+		
+		ResultSet rs = st.executeQuery();
+		List<QnaDTO> ar = new ArrayList<>();
+		while(rs.next())	{
+			QnaDTO qnaDTO = new QnaDTO();
+			qnaDTO.setQna_seq(rs.getInt("qna_seq"));
+			qnaDTO.setTitle(rs.getString("title"));
+			if(rs.getString("company_name")==null){
+				qnaDTO.setWriter(rs.getString("nickname"));
+			}else{
+				qnaDTO.setWriter(rs.getString("company_name"));
+			}
+			qnaDTO.setContents(rs.getString("contents"));
+			qnaDTO.setReg_date(rs.getDate("reg_date"));
+			qnaDTO.setReply_check(rs.getString("reply_check"));
+			qnaDTO.setReply(rs.getString("reply"));
+			ar.add(qnaDTO);
+		}
+		DBConnector.disConnect(rs, st, con);
+		return ar;
+		
+	}
+	
 	public List<QnaDTO> selectList(MakeRow makeRow, String kind, String search) throws Exception	{
 		Connection con = DBConnector.getConnect();
 		String sql = "select * from "
@@ -133,7 +178,7 @@ public class QnaDAO {
 		int result = rs.getInt(1);
 		
 		DBConnector.disConnect(rs, st, con);
-		System.out.println("result : "+result);
+		
 		return result;
 	}
 }

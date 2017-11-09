@@ -7,6 +7,9 @@
 .qnaTitle>h1, .qnaTitle>h4{
 	display: inline-block;
 }
+.qnaTitle>h1>a{
+	color : #83b14e;
+}
 
 .table-title{
 	background-color: #83b14e;

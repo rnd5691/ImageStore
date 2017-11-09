@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
 import com.imagestore.company.CompanyDAO;
+import com.imagestore.member.MemberDTO;
 import com.imagestore.person.PersonDAO;
 import com.imagestore.qna.QnaDAO;
 import com.imagestore.qna.QnaDTO;
@@ -56,7 +58,20 @@ public class QnaListService implements Action {
 		try{
 			int totalCount = qnaDAO.getTotalCount(kind, search);
 			PageMaker pageMaker = new PageMaker(curPage, totalCount);
-			List<QnaDTO> ar = qnaDAO.selectList(pageMaker.getMakeRow(), kind, search);
+			HttpSession session = request.getSession();
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+			
+			if(memberDTO == null){
+				memberDTO = new MemberDTO();
+				memberDTO.setKind("");
+			}
+			
+			List<QnaDTO> ar = null;
+			if(memberDTO.getKind().equals("admin")){
+				ar = qnaDAO.adminSelectList(pageMaker.getMakeRow(), kind, search);
+			}else{
+				ar = qnaDAO.selectList(pageMaker.getMakeRow(), kind, search);
+			}
 			request.setAttribute("list", ar);
 			request.setAttribute("kind", kind);
 			request.setAttribute("search", search);

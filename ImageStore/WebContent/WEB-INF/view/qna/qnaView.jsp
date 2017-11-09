@@ -21,20 +21,30 @@
 		}else{
 		$(".reply_check").css('color', 'blue');
 		}
+		
+		$("#reply_ok").click(function(){
+			document.frm.setAttribute("action", "./qnaReplyUpdate.qna");
+			document.frm.submit();
+		});
 	});
 </script>
 </head>
 <!-- header start -->
-<c:import url="../temp/header.jsp"></c:import>
+<c:if test="${sessionScope.member.kind ne 'admin'}">
+	<c:import url="../temp/header.jsp"></c:import>
+</c:if>
+<c:if test="${sessionScope.member.kind eq 'admin' }">
+	<c:import url="../admin/header.jsp"></c:import>
+</c:if>
 <!-- header finish -->
 
 <!-- contents start -->
 <body>
 <div class="body">
 	<div class="qnaTitle">
-		<h1>Q&A</h1> <h4>View</h4>
+		<h1><a href="qnaList.qna">Q&A</a></h1> <h4>View</h4>
 	</div>
-	<form action="./qnaUpdate.qna">
+	<form name="frm" action="./qnaUpdate.qna">
 		<article>
 			<input type="hidden" name="qna_seq" value="${requestScope.qna.qna_seq}">
 			<div id="view_title">
@@ -48,9 +58,17 @@
 			<div id="contents">
 				<textarea name="contents" readonly="readonly">${requestScope.qna.contents}</textarea>
 			</div>
-			<c:if test="${requestScope.qna.reply ne null }">
+			<c:if test="${sessionScope.member.kind eq 'admin' && empty requestScope.qna.reply}">
 				<div class="reply">
-					<textarea readonly="readonly">${requestScope.qna.reply}</textarea>
+					<textarea name="reply"></textarea>
+				</div>
+				<div class="reply_btn">
+					<button id="reply_ok" class="btn btn-default">확인</button>
+				</div>
+			</c:if>
+			<c:if test="${!empty requestScope.qna.reply }">
+				<div class="reply">
+					<textarea class="before" readonly="readonly">${requestScope.qna.reply}</textarea>
 				</div>
 			</c:if>
 			<c:if test="${sessionScope.writer eq requestScope.qna.writer }">

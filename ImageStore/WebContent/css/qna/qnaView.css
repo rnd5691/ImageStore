@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
-
+.qnaTitle>h1>a{
+	color : #83b14e;
+}
 #view_title{
 	padding : 11px;
 	border-top : 1px solid #ccc;
@@ -46,6 +48,15 @@ textarea {
 .reply{
 	border : 1px solid #eee;
 }
-.button{
-	text-align: right;
+.reply{
+	height: 200px;
 }
+.reply>textarea{
+	height: 100%;
+}
+.button, .reply_btn{
+	text-align: right;
+	margin: 20px 0;
+}
+
+

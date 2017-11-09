@@ -22,7 +22,7 @@
 <body>
 <div class="body">
 	<div class="qnaTitle">
-		<h1>Q&A</h1> <h4>Write</h4>
+		<h1><a href="qnaList.qna">Q&A</a></h1> <h4>Write</h4>
 	</div>
 	<form action="./qnaWrite.qna" method="post">
 		<table class="table table-bordered">

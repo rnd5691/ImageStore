@@ -49,7 +49,7 @@ public class MemberLoginService implements Action {
 		
 		request.setAttribute("message", message);
 		if(memberDTO.getKind().equals("admin")){
-			request.setAttribute("path", "memberAdminLogin.member");
+			request.setAttribute("path", "../qna/qnaList.qna");
 		}else{
 			request.setAttribute("path", "../index.jsp");			
 		}

@@ -4,6 +4,9 @@
 	color : #83b14e;
 	margin-bottom: 20px;
 }
+.qnaTitle>h1>a{
+	color : #83b14e;
+}
 .search{
 	margin-bottom: 10px;
 }
@@ -24,7 +27,6 @@ table{
 	margin : 0 auto;
 	text-align: center;
 }
-
 #btn{
 	float : right;
 }

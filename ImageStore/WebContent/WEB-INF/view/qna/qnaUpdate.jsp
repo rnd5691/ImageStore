@@ -25,7 +25,7 @@
 <!-- contents start -->
 <div class="body">
 	<div class="qnaTitle">
-		<h1>Q&A</h1> <h4>Write</h4>
+		<h1><a href="qnaList.qna">Q&A</a></h1> <h4>Write</h4>
 	</div>
 	<form action="./qnaUpdate.qna" method="post">
 		<input type="hidden" name="qna_seq" value="${requestScope.qna.qna_seq}">

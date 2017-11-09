@@ -15,11 +15,16 @@
 </head>
 <body>
 <!-- header start -->
-<c:import url="../temp/header.jsp"></c:import>
+<c:if test="${sessionScope.member.kind ne 'admin'}">
+	<c:import url="../temp/header.jsp"></c:import>
+</c:if>
+<c:if test="${sessionScope.member.kind eq 'admin' }">
+	<c:import url="../admin/header.jsp"></c:import>
+</c:if>
 <!-- header finish -->
 <div class="body">
 	<div class="qnaTitle">
-		<h1>Q&A</h1>
+		<h1><a href="qnaList.qna">Q&A</a></h1>
 	</div>
 		<form name="frm" action="qnaList.qna" method="post">
 			<div class="search">
@@ -49,9 +54,11 @@
 						<td>${dto.reply_check}</td>
 						<td>${dto.reg_date}</td>
 					</tr>
-				</c:forEach>
+				</c:forEach>	
 			</table>
-			
+			<c:if test="${!empty sessionScope.member && sessionScope.member.kind ne 'admin'}">
+				<a  id="btn" href="./qnaWrite.qna" class="btn btn-default">WRITE</a>			
+			</c:if>
 			<c:if test="${makePage.totalPage > 0}">
 				<div class="paging">
 					<ul class="pagination">
@@ -59,7 +66,7 @@
 							<li><a href="./qnaList.qna?curPage=1&kind=${requestScope.kind}&search=${requestScope.search}">&lt;&lt;</a></li>
 							<li><a href="./qnaList.qna?curPage=${makePage.startNum-1}&kind=${requestScope.kind}&search=${requestScope.search}">[이전]</a></li>
 						</c:if>
-						
+							
 						<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
 							<li><a href="./qnaList.qna?curPage=${i}&kind=${requestScope.kind}&search=${requestScope.search}">${i}</a></li>
 						</c:forEach>
@@ -70,10 +77,8 @@
 					</ul>
 				</div>
 			</c:if>
-			<c:if test="${sessionScope.member ne null}">
-				<a  id="btn" href="./qnaWrite.qna" class="btn btn-default">WRITE</a>
-			</c:if>	
-		</div>
+			
+		</div>		
 	<div class="push"></div>
 </div>
 <!-- footer start -->
