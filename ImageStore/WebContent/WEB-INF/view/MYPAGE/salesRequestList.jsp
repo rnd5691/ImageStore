@@ -12,6 +12,12 @@
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/mypage/mypage.css" rel="stylesheet">
 <link href="../css/mypage/salesRequestList.css" rel="stylesheet">
+<script type="text/javascript">
+	$(function(){
+		$("#salesRequestList").css('color', 'white');
+		$("#salesRequestList").css('background-color', '#83b14e');
+	});
+</script>
 </head>
 <body>
 <!-- header start -->
@@ -22,64 +28,52 @@
 <!-- menu는 mypage나 구매목록이 나오는 탭 부분 -->
 
 <div class="body">
-
-<div class="totalbutton">
-	<div class="totalbutton">
-		<div class="btn-group-vertical">
-			<div class="mypage">MY PAGE</div>
-			<a href="mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
-			<button type="button" class="btn btn-default">구매 목록</button>
-			<a id="select" class="btn btn-default" href="mypageSalesRequestList.mypage">내 작품 판매승인 요청 현황</a>
-			<button type="button" class="btn btn-default">현재 판매 중인 내 작품</button>
-			<button type="button" class="btn btn-default">작품 별 수익 현황</button>
+	<c:import url="./menu.jsp"></c:import>
+	<div class="totalbody">
+		<div class="title">
+			<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청 List</h5>
 		</div>
-	</div>
-</div>
-<div class="totalbody">
-	<div class="title">
-		<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청 List</h5>
-	</div>
-	<div>
-			<table class="table table-hover">
-				<tr class="table-title">
-					<td>번호</td>
-					<td class="title_contents">작품명</td>
-					<td>작가명</td>
-					<td>승인현황</td>
-					<td>등록일자</td>
-				</tr>
-				<c:forEach items="${requestScope.list}" var="dto">
-					<tr>
-						<td>${dto.work_seq}</td>
-						<td><a href="mypageSalesRequestView.mypage?work_seq=${dto.work_seq}">${dto.work}</a></td>
-						<td>${dto.nickname}</td>
-						<td>${dto.upload_check}</td>
-						<td>${dto.work_date}</td>
+		<div>
+				<table class="table table-hover">
+					<tr class="table-title">
+						<td>번호</td>
+						<td class="title_contents">작품명</td>
+						<td>작가명</td>
+						<td>승인현황</td>
+						<td>등록일자</td>
 					</tr>
-				</c:forEach>
-			</table>
-			
-			<div class="paging">
-				<ul class="pagination">
-					<c:if test="${makePage.curBlock>1}">
-						<li><a href="./mypageSalesRequestList.mypage?curPage=1">&lt;&lt;</a></li>
-						<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
-					</c:if>
-					<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-						<li><a href="./mypageSalesRequestList.mypage?curPage${i}">${i}</a></li>
+					<c:forEach items="${requestScope.list}" var="dto">
+						<tr>
+							<td>${dto.work_seq}</td>
+							<td><a href="mypageSalesRequestView.mypage?work_seq=${dto.work_seq}">${dto.work}</a></td>
+							<td>${dto.nickname}</td>
+							<td>${dto.upload_check}</td>
+							<td>${dto.work_date}</td>
+						</tr>
 					</c:forEach>
-					<c:if test="${makePage.curBlock < makePage.totalBlock}">
-						<li><a href="./mypageSalesRequestList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
-						<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
-					</c:if>
-				</ul>
+				</table>
+				
+				<div class="paging">
+					<ul class="pagination">
+						<c:if test="${makePage.curBlock>1}">
+							<li><a href="./mypageSalesRequestList.mypage?curPage=1">&lt;&lt;</a></li>
+							<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
+						</c:if>
+						<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
+							<li><a href="./mypageSalesRequestList.mypage?curPage${i}">${i}</a></li>
+						</c:forEach>
+						<c:if test="${makePage.curBlock < makePage.totalBlock}">
+							<li><a href="./mypageSalesRequestList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
+							<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
+						</c:if>
+					</ul>
+				</div>
+				<c:if test="${sessionScope.member ne null}">
+					<a  id="btn" href="mypageSalesRequestWrite.mypage" class="btn btn-default">WRITE</a>
+				</c:if>	
 			</div>
-			<c:if test="${sessionScope.member ne null}">
-				<a  id="btn" href="#" class="btn btn-default">WRITE</a>
-			</c:if>	
-		</div>
-</div>
-<div class="push"></div>
+	</div>
+	<div class="push"></div>
 </div>
 
 <!-- contents finish -->

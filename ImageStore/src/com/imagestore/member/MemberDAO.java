@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class MemberDAO {
-	
 	//수정 정보 업로드
 	public int update(MemberDTO memberDTO, Connection con) throws Exception{
 		String sql = "update user_info set pw=?, phone=?, email=? where user_num=?";

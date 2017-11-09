@@ -21,15 +21,17 @@
 	<div class="qnaTitle">
 		<h1>Q&A</h1>
 	</div>
-		<div class="search">
-			<select name="kind" id="kind" class="kind">
-				<option value="title">title</option>
-				<option value="writer">writer</option>
-				<option value="contents">contents</option>
-			</select>
-			<input type="text" placeholder="Enter Search" name="search">
-			<input type="button" class="btn btn-default" value="Search">
-		</div>
+		<form name="frm" action="qnaList.qna" method="post">
+			<div class="search">
+				<select name="kind" id="kind" class="kind">
+					<option value="title">title</option>
+					<option value="writer">writer</option>
+					<option value="contents">contents</option>
+				</select>
+				<input type="text" placeholder="Enter Search" name="search">
+				<button class="btn btn-default">Search</button>
+			</div>
+		</form>
 		<div class="contents">
 			<table class="table table-hover">
 				<tr class="table-title">

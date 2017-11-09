@@ -7,6 +7,23 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class CompanyDAO {
+	//작성자가 회사계정인지 확인 하는 부분
+	public int kindCheck(String search) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select * from company where company_name like ?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, "%"+search+"%");
+		
+		ResultSet rs = st.executeQuery();
+		
+		int result = 0;
+		if(rs.next()){
+			result = 1;
+		}
+		
+		return result;
+	}
 	//작성자
 	public String selectWriter(int user_num) throws Exception{
 		Connection con = DBConnector.getConnect();

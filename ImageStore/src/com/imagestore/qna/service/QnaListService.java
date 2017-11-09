@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
+import com.imagestore.company.CompanyDAO;
+import com.imagestore.person.PersonDAO;
 import com.imagestore.qna.QnaDAO;
 import com.imagestore.qna.QnaDTO;
-import com.imagestore.util.MakeRow;
 import com.imagestore.util.PageMaker;
 
 public class QnaListService implements Action {
@@ -28,12 +29,28 @@ public class QnaListService implements Action {
 		}
 		String kind = request.getParameter("kind");
 		String search = request.getParameter("search");
+		if(search==null){
+			search="";
+		}
 		
 		if(kind==null){
 			kind="title";
-		}
-		if(search==null){
-			search="";
+		}else if(kind.equals("writer")){
+			CompanyDAO companyDAO = new CompanyDAO();
+			PersonDAO personDAO = new PersonDAO();
+			
+			try {
+				int company = companyDAO.kindCheck(search);
+				int person = personDAO.kindCheck(search);
+				if(company==1){
+					kind="company_name";
+				}else if(person==1){
+					kind="nickname";
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		try{
