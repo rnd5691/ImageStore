@@ -10,8 +10,7 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class WorkDAO {
-	public WorkDTO selectOne(int work_seq) throws Exception{
-		Connection con = DBConnector.getConnect();
+	public WorkDTO selectOne(int work_seq, Connection con) throws Exception{
 		String sql = "select * from work_info where work_seq=?";
 		PreparedStatement st = con.prepareStatement(sql);
 		
@@ -24,8 +23,7 @@ public class WorkDAO {
 			workDTO.setWork(rs.getString("work"));
 			workDTO.setUser_num(rs.getInt("user_num"));
 			workDTO.setNickname(rs.getString("nickname"));
-			workDTO.setFile_num(rs.getInt("file_num"));
-			workDTO.setWork_seq(work_seq);
+			workDTO.setWork_seq(rs.getInt("work_seq"));
 			workDTO.setWork_date(rs.getDate("work_date"));
 			workDTO.setUpload_check(rs.getString("upload_check"));
 			workDTO.setTag(rs.getString("tag"));
@@ -34,7 +32,8 @@ public class WorkDAO {
 			workDTO.setReply(rs.getString("reply"));
 		}
 		
-		DBConnector.disConnect(rs, st, con);
+		rs.close();
+		st.close();
 		
 		return workDTO;
 	}
@@ -78,4 +77,36 @@ public class WorkDAO {
 		DBConnector.disConnect(rs, st, con);
 		return result;
 	}
+	//업로드
+	public int insert(WorkDTO workDTO, Connection con) throws Exception {
+		String sql = "INSERT INTO work_info VALUES(work_seq.nextval,?,?,?,sysdate,?,?,?,?,?,?,0)";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, workDTO.getWork());
+		st.setInt(2, workDTO.getUser_num());
+		st.setString(3, workDTO.getNickname());
+		st.setString(4, workDTO.getUpload_check());
+		st.setString(5, workDTO.getTag());
+		st.setInt(6, workDTO.getPrice());
+		st.setString(7, workDTO.getContents());
+		st.setString(8, workDTO.getReply());
+		st.setString(9, workDTO.getSell());
+		int result = st.executeUpdate();
+		st.close();
+		return result;
+	}
+	
+	//work_seq 찾기
+		 public int fileNumSelect(int user_num, Connection con) throws Exception {
+			 String sql = "SELECT work_seq FROM work_info WHERE user_num=?";
+			 PreparedStatement st = con.prepareStatement(sql);
+			 st.setInt(1, user_num);
+			 ResultSet rs = st.executeQuery();
+			 int work_seq = 0;
+			 if(rs.next()) {
+				work_seq = rs.getInt("work_seq");
+			 }
+			 rs.close();
+			 st.close();
+			 return work_seq;
+		 }
 }

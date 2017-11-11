@@ -48,7 +48,7 @@
 						<td class="tdtable1">파일</td>
 						<td>
 						<input type="text" id="file_name" name="file_name" value="">
-						<input type="file" id="file_route" name="file_route" value="">
+						<input type="file" id="file_route" name="file_route">
 						</td>
 					</tr>
 					<tr>

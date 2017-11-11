@@ -39,7 +39,7 @@
 		<table class="table">
 			<tr>
 				<td rowspan="9" colspan="2">
-					<img src="../images/test.jpg">
+					<img src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name}">
 				</td>
 			</tr>
 			<tr>
@@ -79,6 +79,10 @@
 			<div class="reply">
 				<textarea name="reply" readonly="readonly">${requestScope.work.reply }</textarea>
 			</div>		
+		</c:if>
+		<c:if test="${requestScope.work.upload_check eq '대기중' }">
+		<a class="btn btn-default" href="#">UPDATE</a>
+		<a class="btn btn-default" href="#">DELETE</a>
 		</c:if>
 	</form>
 </div>

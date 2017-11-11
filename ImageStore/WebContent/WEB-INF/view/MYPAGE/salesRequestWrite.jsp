@@ -16,6 +16,21 @@
 	$(function(){
 		$("#salesRequestList").css('color', 'white');
 		$("#salesRequestList").css('background-color', '#83b14e');
+		
+		$("#file").change(function(){
+			if($(this).val() != ""){
+				var file = this.files[0]; // files 를 사용하면 파일의 정보를 알 수 있음
+				// file 은 배열 형태이므로 file[0] 처럼 접근해야함
+				var _URL = window.URL || window.webkitURL;
+				var img = new Image();
+					
+				img.src = _URL.createObjectURL(file);
+				img.onload = function(){
+				 	$("#fileWidth").val(img.naturalWidth);
+					$("#fileHeight").val(img.naturalHeight);
+				}
+			}
+		});
 	});
 </script>
 </head>
@@ -31,7 +46,7 @@
 		<div class="title">
 			<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청 작성</h5>
 		</div>
-		<form>
+		<form action="mypageSalesRequestWrite.mypage" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="nickname" value="${requestScope.nickname}">
 			<table class="table table-hover">
 				<tr>
@@ -40,7 +55,9 @@
 				</tr>
 				<tr>
 					<td>파일</td>
-					<td class="input_info"><input type="file" required="required" name="file_name"></td>
+					<td class="input_info"><input type="file" required="required" id="file" name="file"></td>
+					<input type="hidden" id="fileWidth" name="width"><!-- width 값 -->
+					<input type="hidden" id="fileHeight" name="height"><!-- height 값  -->
 				</tr>
 				<tr>
 					<td>가격</td>
@@ -48,11 +65,11 @@
 				</tr>
 				<tr>
 					<td>태그</td>
-					<td class="input_info"><textarea placeholder="예시)강아지,하늘,풀"></textarea></td>
+					<td class="input_info"><textarea placeholder="예시)강아지,하늘,풀" name="tag"></textarea></td>
 				</tr>
 				<tr>
 					<td>상세 내용</td>
-					<td class="input_info"><textarea></textarea></td>
+					<td class="input_info"><textarea name="contents"></textarea></td>
 				</tr>
 			</table>
 			<div class="button">
