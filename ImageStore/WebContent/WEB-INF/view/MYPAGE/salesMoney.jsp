@@ -42,11 +42,14 @@
 				<tr>
 					<td class="tdtable1" colspan="2">총 내 작품</td>
 					<td>
-					<input type="text" id="totalfile" name="totalfile" value="">개
+					<input type="text" id="totalfile" name="totalfile" value="${workTotal}"
+					readonly="readonly">개
 					</td>
 					<td class="tdtable1" colspan="2">총 판매 금액</td>
 					<td>
-					<input type="text" id="totalmoney" name="totalmoney" value="">원
+					
+					<input type="text" id="totalMoney" name="totalMoney" 
+					value="${requestScope.totalMoney}" readonly="readonly">원
 					</td>
 				</tr>
 			</table>
@@ -67,25 +70,29 @@
 					<td class="tdtable2">${dto.nickname}</td>
 					<td class="tdtable2">${dto.work_date}</td>
 					<td class="tdtable2">${dto.price}</td>
-					<td class="tdtable2"></td>
+					<td class="tdtable2">${dto.download_hit * dto.price}</td>
 				</tr>
 				</c:forEach>
+				
 			</table>
+			
 			<div class="paging">
 				<ul class="pagination">
-					<c:if test="${makePage.curBlock>1}">
-						<li><a href="./mypageSalesMoney.mypage?curPage=1">&lt;&lt;</a></li>
-						<li><a href="./mypageSalesMoney.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
+				<c:if test="${makePage.curBlock>1}">
+						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${1}&user_num=${member.user_num}">&lt;&lt;</a></li>
+						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.startNum-1}&user_num=${member.user_num}">[이전]</a></li>
 					</c:if>
 					<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-						<li><a href="./mypageSalesMoney.mypage?curPage=${i}">${i}</a></li>
+						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${i}&user_num=${member.user_num}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${makePage.curBlock < makePage.totalBlock}">
-						<li><a href="./mypageSalesMoney.mypage?curPage=${makePage.getLastNum()+1}">[다음]</a></li>
-						<li><a href="./mypageSalesMoney.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
+						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.lastNum+1}&user_num=${member.user_num}">[다음]</a></li>
+						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.totalPage}&user_num=${member.user_num}">&gt;&gt;</a></li>
 					</c:if>
+					
 				</ul>
 			</div>
+			
 		</div>
 	</div>
 
