@@ -2,10 +2,19 @@ package com.imagestore.file;
 
 public class FileDTO {
 	private int file_num;
+	private int work_seq;
 	private String file_route;
 	private String width;
 	private String height;
+	
+	public int getWork_seq() {
+		return work_seq;
+	}
+	public void setWork_seq(int work_seq) {
+		this.work_seq = work_seq;
+	}
 	private String file_name;
+	
 	public int getFile_num() {
 		return file_num;
 	}

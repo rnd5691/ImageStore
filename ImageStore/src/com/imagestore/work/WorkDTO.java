@@ -6,7 +6,6 @@ public class WorkDTO {
 	private String work;//작품명
 	private int user_num;//회원 번호
 	private String nickname;//닉네임
-	private int file_num;//파일 번호
 	private int work_seq;//리스트 순서
 	private Date work_date;//등록일자
 	private String upload_check;//업로드 승인 현황
@@ -33,12 +32,6 @@ public class WorkDTO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-	public int getFile_num() {
-		return file_num;
-	}
-	public void setFile_num(int file_num) {
-		this.file_num = file_num;
 	}
 	public int getWork_seq() {
 		return work_seq;

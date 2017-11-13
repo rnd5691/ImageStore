@@ -21,7 +21,6 @@ public class SalesRequestListService implements Action {
 		ActionFoward actionFoward = new ActionFoward();
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		
 		WorkDAO workDAO = new WorkDAO();
 		int curPage = 1;
 		try{
