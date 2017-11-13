@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import com.imagestore.util.DBConnector;
 
 public class MemberDAO {
+	
 	//수정 정보 업로드
 	public int update(MemberDTO memberDTO, Connection con) throws Exception{
 		String sql = "update user_info set pw=?, phone=?, email=? where user_num=?";
@@ -61,19 +62,19 @@ public class MemberDAO {
 		if(rs.next()){
 			user_num = rs.getInt("user_num");
 		}
-		
 		return user_num;
 	}
 	//회원가입 정보 넣기(공통정보)
 	public int insert(MemberDTO memberDTO, Connection con) throws Exception{
-		String sql = "insert into user_info values(user_num.nextval,?,?,?,?,'N','NULL',?)";
+		String sql = "insert into user_info values(user_num.nextval,?,?,?,?,'N',?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
 		
 		st.setString(1, memberDTO.getId());
 		st.setString(2, memberDTO.getPw());
 		st.setString(3, memberDTO.getPhone());
 		st.setString(4, memberDTO.getEmail());
-		st.setString(5, memberDTO.getKind());
+		st.setString(5, memberDTO.getToken());
+		st.setString(6, memberDTO.getKind());
 		
 		int result = st.executeUpdate();
 		

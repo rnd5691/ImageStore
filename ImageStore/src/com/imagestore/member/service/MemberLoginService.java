@@ -24,10 +24,12 @@ public class MemberLoginService implements Action {
 		memberDTO.setId(request.getParameter("id"));
 		memberDTO.setPw(request.getParameter("pw"));
 		memberDTO.setKind(request.getParameter("kind"));
+		
 		String message = "로그인 실패 하셨습니다.";
 		HttpSession session = request.getSession();
 		try {
 			memberDTO = memberDAO.selectOne(memberDTO);
+			
 			if(memberDTO != null) {
 				session.setAttribute("member", memberDTO);
 				String writer = null;
@@ -40,19 +42,20 @@ public class MemberLoginService implements Action {
 				}
 				session.setAttribute("writer", writer);
 				message = "로그인 성공";
+				if(memberDTO.getKind().equals("admin")){
+					request.setAttribute("path", "../qna/qnaList.qna");
+				}else{
+					request.setAttribute("path", "../index.jsp");			
+				}
+			}else{
+				request.setAttribute("path", "../index.jsp");
 			}
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		request.setAttribute("message", message);
-		if(memberDTO.getKind().equals("admin")){
-			request.setAttribute("path", "../qna/qnaList.qna");
-		}else{
-			request.setAttribute("path", "../index.jsp");			
-		}
+		
 		
 		actionFoward.setCheck(true);
 		actionFoward.setPath("../WEB-INF/view/common/result.jsp");

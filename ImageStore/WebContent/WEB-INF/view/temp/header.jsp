@@ -10,7 +10,7 @@
 				<li><a href="${pageContext.request.contextPath}/qna/qnaList.qna">Q&A</a></li>
 				<li>무명작가</li>
 			</ul>
-			<a href="${pageContext.request.contextPath}/index.jsp"><img class="logo" align="middle" alt="logo" src="<%=request.getContextPath()%>/images/logo.png"></a>
+			<a href="${pageContext.request.contextPath}/index.jsp"><img class="logo" align="middle" alt="logo" src="${pageContext.request.contextPath}/images/logo.png"></a>
 			<ul class="header_join">
 				<li>Pay Info</li>
 				<c:choose>
@@ -53,8 +53,9 @@
 						         	<input class="idpw" type="password" name="pw" required="required" placeholder="비밀번호를 입력">
 						        </div>
 						        <div class="modal-footer">
-						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						          <button class="btn btn-default">Login</button>
+						        	<a href="${pageContext.request.contextPath}/member/memberNaverLogin.member"><img class="naver_login" src="${pageContext.request.contextPath}/images/naver_login.PNG"></a>
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						        	<button class="btn btn-default">Login</button>
 						        </div>						   
 						    </form>
 					      </div>

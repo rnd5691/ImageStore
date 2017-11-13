@@ -11,7 +11,24 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class WorkDAO {
-	
+	public String searchWork(int work_seq) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select work from work_info where work_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, work_seq);
+		ResultSet rs = st.executeQuery();
+		
+		String work = null;
+		if(rs.next()){
+			work = rs.getString("work");
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+		
+		return work;
+		
+	}
 	//총 수익금액 계산 메소드
 	public int totalMoney(int user_num) throws Exception	{
 		Connection con = DBConnector.getConnect();

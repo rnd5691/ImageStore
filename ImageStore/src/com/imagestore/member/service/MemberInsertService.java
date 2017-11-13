@@ -28,7 +28,7 @@ public class MemberInsertService implements Action {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String kind = request.getParameter("kind");
-		System.out.println("id : "+id+", pw : "+pw+", phone : "+phone+", email : "+email+", kind : "+kind);
+		
 		Connection con = null;
 		MemberDAO memberDAO = new MemberDAO();
 		int result = 0;
@@ -43,7 +43,8 @@ public class MemberInsertService implements Action {
 			memberDTO.setPhone(phone);
 			memberDTO.setEmail(email);
 			memberDTO.setKind(kind);
-
+			memberDTO.setToken("NULL");
+			
 			result = memberDAO.insert(memberDTO, con);
 			
 			int user_num = memberDAO.searchUserNum(memberDTO, con);
@@ -68,7 +69,11 @@ public class MemberInsertService implements Action {
 				personDTO.setNickName(request.getParameter("nickname"));
 				personDTO.setUser_num(user_num);
 				personDTO.setName(request.getParameter("name"));
-				personDTO.setBirth(Date.valueOf(request.getParameter("birth")));
+				
+				if(!request.getParameter("birth").equals("")){
+					personDTO.setBirth(Date.valueOf(request.getParameter("birth")));					
+				}
+				
 				personDTO.setArtist(request.getParameter("artist"));
 				
 				result = personDAO.insert(personDTO, con);

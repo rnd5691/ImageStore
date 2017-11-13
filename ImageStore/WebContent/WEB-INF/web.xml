@@ -48,7 +48,6 @@
   	<filter-name>encoding</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
-  
   <servlet>
     <servlet-name>Search</servlet-name>
     <servlet-class>com.imagestore.control.SearchController</servlet-class>

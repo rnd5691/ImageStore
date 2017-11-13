@@ -28,6 +28,7 @@ header{
 }
 .modal-content{
 	margin-top : 100px;
+	width: 400px;
 }
 .modal-header>.modal-title{
 	margin-top : 10px;
@@ -82,6 +83,9 @@ header{
 }
 .admin{
 	display: none;
+}
+.naver_login{
+	height: 34px;
 }
 /*header 끝*/
 /* contents 공통 부분 */

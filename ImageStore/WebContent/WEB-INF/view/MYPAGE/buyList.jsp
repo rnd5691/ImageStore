@@ -11,6 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/mypage/mypage.css" rel="stylesheet">
+<link href="../css/mypage/List.css" rel="stylesheet">
 <script type="text/javascript">
 	$(function(){
 		$("#buyList").css('color', 'white');
@@ -33,7 +34,41 @@
 			<h1>My Page</h1>&nbsp;&nbsp;<h5>구매 목록</h5>
 		</div>
 		<div>
-				
+			<table class="table table-hover">
+					<tr class="table-title">
+						<td>번호</td>
+						<td class="title_contents">작품명</td>
+						<td>작가명</td>
+						<td>구매금액</td>
+						<td>구매일자</td>
+					</tr>
+					<c:forEach items="${requestScope.list}" var="dto">
+						<tr>
+							<td>${dto.buy_seq}</td>
+							<td>${dto.work}</td>
+							<td>${dto.nickname}</td>
+							<td>${dto.price}</td>
+							<td>${dto.buy_date}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<c:if test="${makePage.totalPage > 0}">
+					<div class="paging">
+						<ul class="pagination">
+							<c:if test="${makePage.curBlock>1}">
+								<li><a href="./mypageBuyList.mypage?curPage=1">&lt;&lt;</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
+							</c:if>
+							<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
+								<li><a href="./mypageBuyList.mypage?curPage${i}">${i}</a></li>
+							</c:forEach>
+							<c:if test="${makePage.curBlock < makePage.totalBlock}">
+								<li><a href="./mypageBuyList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</c:if>
 		</div>
 	</div>
 	<div class="push"></div>
