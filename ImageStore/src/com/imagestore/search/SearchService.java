@@ -39,7 +39,7 @@ public class SearchService implements Action {
 				String[] tag = ar.get(i).getTag().split(",");
 				for(int j=0; j<tag.length; j++) {
 					System.out.println("tag["+j+"]"+tag[j]);
-					if(tag[j].equals(search)) {
+					if(tag[j].trim().equals(search)) {
 						fileName = workDAO.seachWorkSEQ(con, tag[j]);
 					}
 				}

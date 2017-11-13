@@ -70,8 +70,10 @@ public class SalesRequestWriteService implements Action {
 				con = DBConnector.getConnect();
 				con.setAutoCommit(false);
 				//유저인포
+				int seq = workDAO.fileNumSelect(con);
 				workDTO.setWork(multi.getParameter("work"));
 				workDTO.setUser_num(memberDTO.getUser_num());
+				workDTO.setWork_seq(seq);
 				workDTO.setNickname(writer);
 				workDTO.setUpload_check("대기중");
 				workDTO.setTag(multi.getParameter("tag"));
@@ -81,11 +83,11 @@ public class SalesRequestWriteService implements Action {
 				workDTO.setSell("N");
 				
 				result = workDAO.insert(workDTO, con);
-				int seq = workDAO.fileNumSelect(memberDTO.getUser_num(),con);
-				System.out.println("Work-seq 글쓰기 서비스 : "+seq);
+				System.out.println("Work-seq : "+workDTO.getWork_seq());
 				//파일 테이블
 				fileDTO.setFile_name(fileName);
 				fileDTO.setWork_seq(seq);
+				System.out.println("file work-seq : "+fileDTO.getWork_seq());
 				fileDTO.setWidth(multi.getParameter("width"));
 				fileDTO.setHeight(multi.getParameter("height"));
 				fileDTO.setFile_route(savePath);

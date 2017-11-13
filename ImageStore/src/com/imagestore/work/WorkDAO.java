@@ -200,27 +200,27 @@ public class WorkDAO {
 	}
 	
 	public int insert(WorkDTO workDTO,Connection con) throws Exception {
-		String sql = "INSERT INTO work_info VALUES(work_seq.nextval,?,?,?,sysdate,?,?,?,?,?,?,0)";
+		String sql = "INSERT INTO work_info VALUES(?,?,?,?,sysdate,?,?,?,?,?,?,0)";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, workDTO.getWork());
-		st.setInt(2, workDTO.getUser_num());
-		st.setString(3, workDTO.getNickname());
-		st.setString(4, workDTO.getUpload_check());
-		st.setString(5, workDTO.getTag());
-		st.setInt(6, workDTO.getPrice());
-		st.setString(7, workDTO.getContents());
-		st.setString(8, workDTO.getReply());
-		st.setString(9, workDTO.getSell());
+		st.setInt(1, workDTO.getWork_seq());
+		st.setString(2, workDTO.getWork());
+		st.setInt(3, workDTO.getUser_num());
+		st.setString(4, workDTO.getNickname());
+		st.setString(5, workDTO.getUpload_check());
+		st.setString(6, workDTO.getTag());
+		st.setInt(7, workDTO.getPrice());
+		st.setString(8, workDTO.getContents());
+		st.setString(9, workDTO.getReply());
+		st.setString(10, workDTO.getSell());
 		int result = st.executeUpdate();
 		st.close();
 		return result;
 	}
 	
 	//work_seq 찾기
-		 public int fileNumSelect(int user_num, Connection con) throws Exception {
-			 String sql = "SELECT work_seq FROM work_info WHERE user_num=?";
+		 public int fileNumSelect(Connection con) throws Exception {
+			 String sql = "SELECT work_seq.nextval work_seq from dual";
 			 PreparedStatement st = con.prepareStatement(sql);
-			 st.setInt(1, user_num);
 			 ResultSet rs = st.executeQuery();
 			 int work_seq = 0;
 			 if(rs.next()) {
