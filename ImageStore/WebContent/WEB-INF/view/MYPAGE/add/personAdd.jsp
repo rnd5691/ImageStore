@@ -17,7 +17,7 @@
 		<td><input type="text" name="name" value="${requestScope.name}"></td>
 	</tr>
 	<tr>
-		<td><span>*</span>생년월일</td>
+		<td>생년월일</td>
 		<td><input type="date" name="birth" required="required" value="${requestScope.birth}"></td>
 	</tr>
 	<tr>

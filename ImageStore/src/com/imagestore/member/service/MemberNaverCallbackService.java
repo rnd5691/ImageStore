@@ -104,7 +104,7 @@ public class MemberNaverCallbackService implements Action {
 			connect = DBConnector.getConnect();
 			MemberDAO memberDAO = new MemberDAO();
 			int user_num = memberDAO.searchUserNum(personDTO, connect);
-			System.out.println("user_num : "+user_num);
+			
 			personDTO.setUser_num(user_num);
 			if(check==true){
 				
