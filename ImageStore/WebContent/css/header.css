@@ -20,6 +20,7 @@ header{
 	position:fixed;
 	background-color: white;
 	border-bottom: 1px solid black;
+	z-index: 999;
 }
 .logo{
 	height: 30px;

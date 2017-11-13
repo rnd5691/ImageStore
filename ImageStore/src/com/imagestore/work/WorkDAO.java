@@ -6,10 +6,54 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.imagestore.file.FileDTO;
 import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class WorkDAO {
+	//태그에 해당하는 값만 가져와!
+		public List<FileDTO> seachWorkSEQ(Connection con, String tag) throws Exception {
+			String sql = "SELECT rownum ,f.* FROM FILE_TABLE f WHERE work_seq IN (SELECT w.work_seq FROM work_info w WHERE tag LIKE '%"+tag+"%') ORDER BY rownum desc";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			List<FileDTO> ar = new ArrayList<>();
+			FileDTO fileDTO = null;
+			while(rs.next()) {
+				fileDTO = new FileDTO();
+				fileDTO.setWork_seq(rs.getInt("work_seq"));
+				fileDTO.setFile_name(rs.getString("file_name"));
+				ar.add(fileDTO);
+			}
+			rs.close();
+			st.close();
+			return ar;
+		}
+		//모든정보 가져와!
+		public List<WorkDTO> selectAll(Connection con) throws Exception {
+			String sql = "SELECT * FROM work_info";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			List<WorkDTO> ar = new ArrayList<>();
+			WorkDTO workDTO = null;
+			while(rs.next()) {
+				workDTO = new WorkDTO();
+				workDTO.setWork(rs.getString("work"));
+				workDTO.setUser_num(rs.getInt("user_num"));
+				workDTO.setNickname(rs.getString("nickname"));
+				workDTO.setWork_seq(rs.getInt("work_seq"));
+				workDTO.setWork_date(rs.getDate("work_date"));
+				workDTO.setUpload_check(rs.getString("upload_check"));
+				workDTO.setTag(rs.getString("tag"));
+				workDTO.setPrice(rs.getInt("price"));
+				workDTO.setContents(rs.getString("contents"));
+				workDTO.setReply(rs.getString("reply"));
+				ar.add(workDTO);
+			}
+			rs.close();
+			st.close();
+			return ar;
+		}
+	
 	public WorkDTO selectOne(int work_seq, Connection con) throws Exception{
 		String sql = "select * from work_info where work_seq=?";
 		PreparedStatement st = con.prepareStatement(sql);
