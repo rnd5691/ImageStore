@@ -11,6 +11,30 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class WorkDAO {
+	
+	//salesReuqestViewDelete
+		public void salesRequestViewDelete(int work_seq, Connection con) throws Exception {
+			String sql = "DELETE work_info WHERE work_seq=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, work_seq);
+			st.executeUpdate();
+			st.close();
+		}
+	
+	//viewUpdate
+	public int salesViewUpdate(WorkDTO workDTO, Connection con) throws Exception {
+		String sql = "UPDATE work_info SET work=?, work_date=sysdate, tag=?, price=?, contents=? WHERE work_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, workDTO.getWork());
+		st.setString(2, workDTO.getTag());
+		st.setInt(3, workDTO.getPrice());
+		st.setString(4, workDTO.getContents());
+		st.setInt(5, workDTO.getWork_seq());
+		int result = st.executeUpdate();
+		st.close();
+		return result;
+	}
+	
 	public String searchWork(int work_seq) throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "select work from work_info where work_seq=?";

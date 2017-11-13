@@ -16,6 +16,17 @@
 	$(function(){
 		$("#salesRequestList").css('color', 'white');
 		$("#salesRequestList").css('background-color', '#83b14e');
+		
+		//업데이트
+		$("#viewUpdate").click(function(){
+			$("#frm").prop("action", "mypageSalesRequestViewUpdate.mypage");
+			$("#frm").submit();
+		});
+		//삭제
+		$("#viewDelete").click(function(){
+			$("#frm").prop("action", "mypageSalesRequestViewDelete.mypage");
+			$("#frm").submit();
+		});
 	});
 </script>
 </head>
@@ -34,7 +45,7 @@
 	<div class="title">
 		<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청</h5>
 	</div>
-	<form>
+	<form method="get" id="frm">
 		<input type="hidden" name="work_seq" value="${requestScope.work.work_seq}">
 		<table class="table">
 			<tr>
@@ -81,8 +92,8 @@
 			</div>		
 		</c:if>
 		<c:if test="${requestScope.work.upload_check eq '대기중' }">
-		<a class="btn btn-default" href="#">UPDATE</a>
-		<a class="btn btn-default" href="#">DELETE</a>
+		<input type="button" class="btn btn-default" id="viewUpdate" value="UPDATE">
+		<input type="button" class="btn btn-default" id="viewDelete" value="DELETE">
 		</c:if>
 	</form>
 </div>

@@ -25,23 +25,23 @@ public class SalesRequestViewService implements Action {
 		WorkDTO workDTO = null;
 		FileDTO fileDTO = null;
 		Connection con = null;
-		try{
-			con = DBConnector.getConnect();
-			con.setAutoCommit(false);
-			workDTO = workDAO.selectOne(work_seq, con);
-			FileDAO fileDAO = new FileDAO();
-			fileDTO = fileDAO.selectOne(work_seq, con);
-			System.out.println("파일DTO : "+fileDTO);
-			con.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-			con.rollback();
-		} finally {
-			con.setAutoCommit(true);
-			con.close();
-		}
-		request.setAttribute("file", fileDTO);
-		request.setAttribute("work", workDTO);
+			try{
+				con = DBConnector.getConnect();
+				con.setAutoCommit(false);
+				workDTO = workDAO.selectOne(work_seq, con);
+				FileDAO fileDAO = new FileDAO();
+				fileDTO = fileDAO.selectOne(work_seq, con);
+				System.out.println("파일DTO : "+fileDTO);
+				con.commit();
+			}catch(Exception e){
+				e.printStackTrace();
+				con.rollback();
+			} finally {
+				con.setAutoCommit(true);
+				con.close();
+			}
+			request.setAttribute("file", fileDTO);
+			request.setAttribute("work", workDTO);
 		
 		actionFoward.setCheck(true);
 		actionFoward.setPath("../WEB-INF/view/MYPAGE/salesRequestView.jsp");
