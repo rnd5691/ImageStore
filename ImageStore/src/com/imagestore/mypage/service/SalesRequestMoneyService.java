@@ -58,7 +58,7 @@ public class SalesRequestMoneyService implements Action {
 			e.printStackTrace();
 		}
 		actionFoward.setCheck(true);
-		actionFoward.setPath("../WEB-INF/view/MYPAGE/salesMoney.jsp");
+		actionFoward.setPath("../WEB-INF/view/MYPAGE/salesRequestMoney.jsp");
 				
 		return actionFoward;
 	}

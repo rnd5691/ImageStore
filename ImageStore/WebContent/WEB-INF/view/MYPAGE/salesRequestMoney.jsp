@@ -12,6 +12,12 @@
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/mypage/mypage.css" rel="stylesheet">
 <link href="../css/sales/salesMoney.css" rel="stylesheet">
+<script type="text/javascript">
+$(function(){
+	$("#salesRequestMoney").css('color', 'white');
+	$("#salesRequestMoney").css('background-color', '#83b14e');
+});
+</script>
 </head>
 <body>
 <!-- header start -->
@@ -22,16 +28,7 @@
 <!-- menu는 mypage나 구매목록이 나오는 탭 부분 -->
 
 <div class="body">
-	<div class="totalbutton">
-		<div class="btn-group-vertical">
-			<div class="mypage">MY PAGE</div>
-			<a href="${pageContext.request.contextPath}/mypage/mypageMyInfo.mypage" class="btn btn-default">내 정보</a>
-			<a class="btn btn-default" href="${pageContext.request.contextPath}/buy/buyList.buy">구매 목록</a>
-			<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestList.sales">내 작품 판매승인 요청 현황</a>
-			<a class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestNow.sales">현재 판매 중인 내 작품</a>
-			<a id="select" class="btn btn-default" href="${pageContext.request.contextPath}/sales/salesRequestMoney.sales">작품 별 수익 현황</a>
-		</div>
-	</div>
+	<c:import url="./menu.jsp"></c:import>
 <div class="totalbody">
 	<div class="title">
 		<h1>My Page</h1>&nbsp;&nbsp;<h5>작품 별 수익 현황</h5>

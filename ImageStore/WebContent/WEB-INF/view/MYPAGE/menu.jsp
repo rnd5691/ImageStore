@@ -8,7 +8,7 @@
 			<a class="btn btn-default" href="mypageBuyList.mypage?user_num=${sessionScope.member.user_num}">구매 목록</a>
 			<a id="salesRequestList" class="btn btn-default" href="mypageSalesRequestList.mypage">내 작품 판매승인 요청 현황</a>
 			<button type="button" class="btn btn-default">현재 판매 중인 내 작품</button>
-			<a class="btn btn-default" href="mypageSalesRequestMoney.mypage?user_num=${sessionScope.member.user_num}">작품 별 수익 현황</a>
+			<a id="salesRequestMoney" class="btn btn-default" href="mypageSalesRequestMoney.mypage?user_num=${sessionScope.member.user_num}">작품 별 수익 현황</a>
 		</div>
 	</div>
 </div>
