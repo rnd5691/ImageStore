@@ -23,49 +23,60 @@
 <title>Media Bank</title>
 <link href="./css/index.css" rel="stylesheet">
 <script>
-	$(function() {
-		$("#btn").click(function() {
+$(function() {
+	$("#btn").click(function() {
+		if ($("#select").val() == "video") {
+			$("#kind").prop("value", false);
+		} else {
+			$("#kind").prop("value", true);
+		}
+		document.frm.submit();
+	});
+	
+	$("#search").keydown(function(key){
+		if(key.keyCode==13){
 			if ($("#select").val() == "video") {
 				$("#kind").prop("value", false);
 			} else {
 				$("#kind").prop("value", true);
 			}
 			document.frm.submit();
-		});
-		
-		 $('.searh_main').slick({
-			  slidesToShow: 1,
-			  slidesToScroll: 1,
-			  arrows: false,
-			  fade: true,
-			  asNavFor: '.multiple-items'
-			});
-			$('.multiple-items').slick({
-			  slidesToShow: 3,
-			  slidesToScroll: 1,
-			  asNavFor: '.searh_main',
-			  dots: true,
-			  centerMode: true,
-			  focusOnSelect: true
-			});
-		
-		var API_KEY = '5591688-41cb145c7a8c9f609261640ef';
-		var count = 1;
-		var URL = "https://pixabay.com/api/?key=" + API_KEY +"&q="
-				+ encodeURIComponent('풍경');
-		
-		$.getJSON(URL, function(data) {
-		if (parseInt(data.totalHits) > 0) {	
-			$.each(data.hits, function(i, hit) {
-				$("#slide"+count).prop("src", hit.webformatURL);
-				$("#slider"+count).prop("src", hit.webformatURL);
-				count++;
-				});
-			} else {
-				console.log('No hits');
-			}
-		});
+		}
 	});
+	
+	 $('.searh_main').slick({
+		  slidesToShow: 1,
+		  slidesToScroll: 1,
+		  arrows: false,
+		  fade: true,
+		  asNavFor: '.multiple-items'
+		});
+		$('.multiple-items').slick({
+		  slidesToShow: 3,
+		  slidesToScroll: 1,
+		  asNavFor: '.searh_main',
+		  dots: true,
+		  centerMode: true,
+		  focusOnSelect: true
+		});
+		
+	var API_KEY = '5591688-41cb145c7a8c9f609261640ef';
+	var count = 1;
+	var URL = "https://pixabay.com/api/?key=" + API_KEY +"&q="
+			+ encodeURIComponent(' ');
+	
+	$.getJSON(URL, function(data) {
+	if (parseInt(data.totalHits) > 0) {	
+		$.each(data.hits, function(i, hit) {
+			$("#slide"+count).prop("src", hit.webformatURL);
+			$("#slider"+count).prop("src", hit.webformatURL);
+			count++;
+			});
+		} else {
+			console.log('No hits');
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -87,9 +98,11 @@
 <!-- 검색창 -->
 	<h3 class="search-text">Beautiful Free Image!</h3>
 	<div id="search_warp">
-	<form action="./search/searchList.jsp" name="frm" id="f_position">
+	<form action="search/searchList.search" name="frm" id="f_position">
 		<input type="text" name="search" class="form-control" placeholder="Search images, videos">
 		<input type="hidden" id="kind" name="kind">
+		<input type="hidden" name="perPage" value="1">
+		<input type="hidden" name="check" value=true>
 		<select id="select" name="select" class="form-control">
 			<option value="">사진</option>
 			<option value="video">비디오</option>
