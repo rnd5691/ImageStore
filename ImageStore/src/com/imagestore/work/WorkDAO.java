@@ -164,6 +164,8 @@ public class WorkDAO {
 			workDTO.setNickname(rs.getString("nickname"));
 			workDTO.setWork_date(rs.getDate("work_date"));
 			workDTO.setUpload_check(rs.getString("upload_check"));
+			workDTO.setDownload_hit(rs.getInt("download_hit"));
+			workDTO.setPrice(rs.getInt("price"));
 			
 			ar.add(workDTO);
 		}
