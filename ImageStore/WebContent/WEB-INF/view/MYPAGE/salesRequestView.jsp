@@ -91,9 +91,9 @@
 				<textarea name="reply" readonly="readonly">${requestScope.work.reply }</textarea>
 			</div>		
 		</c:if>
-		<c:if test="${requestScope.work.upload_check eq '대기중' }">
-		<input type="button" class="btn btn-default" id="viewUpdate" value="UPDATE">
-		<input type="button" class="btn btn-default" id="viewDelete" value="DELETE">
+		<c:if test="${requestScope.work.upload_check eq '대기중' && empty requestScope.work.reply}">
+		<input type="button" class="bloat btn btn-default" id="viewDelete" value="DELETE">
+		<input type="button" class="bloat btn btn-default" id="viewUpdate" value="UPDATE">
 		</c:if>
 	</form>
 </div>

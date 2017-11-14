@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,13 +17,11 @@ $(function(){
 	$("#salesRequestList").css('color', 'white');
 	$("#salesRequestList").css('background-color', '#83b14e');
 	
-	
-	
-	//ÆÄÀÏ »çÀÌÁî Ã¼Å©
+	//íŒŒì¼ ì‚¬ì´ì¦ˆ ì²´í¬
 	$("#file").change(function(){
 		if($(this).val() != ""){
-			var file = this.files[0]; // files ¸¦ »ç¿ëÇÏ¸é ÆÄÀÏÀÇ Á¤º¸¸¦ ¾Ë ¼ö ÀÖÀ½
-			// file Àº ¹è¿­ ÇüÅÂÀÌ¹Ç·Î file[0] Ã³·³ Á¢±ÙÇØ¾ßÇÔ
+			var file = this.files[0]; // files ë¥¼ ì‚¬ìš©í•˜ë©´ íŒŒì¼ì˜ ì •ë³´ë¥¼ ì•Œ ìˆ˜ ìˆìŒ
+			// file ì€ ë°°ì—´ í˜•íƒœì´ë¯€ë¡œ file[0] ì²˜ëŸ¼ ì ‘ê·¼í•´ì•¼í•¨
 			var _URL = window.URL || window.webkitURL;
 			var img = new Image();
 				
@@ -42,6 +40,12 @@ $(function(){
 	});
 });
 </script>
+<style type="text/css">
+	.border {
+		border: 1px solid rgb(169, 169, 169);
+		border-radius: 5px;
+	}
+</style>
 </head>
 <body>
 <!-- header start -->
@@ -49,58 +53,58 @@ $(function(){
 <!-- header finish -->
 
 <!-- contents start -->
-<!-- menu´Â mypage³ª ±¸¸Å¸ñ·ÏÀÌ ³ª¿À´Â ÅÇ ºÎºĞ -->
+<!-- menuëŠ” mypageë‚˜ êµ¬ë§¤ëª©ë¡ì´ ë‚˜ì˜¤ëŠ” íƒ­ ë¶€ë¶„ -->
 
 <div class="body">
 
 <c:import url="./menu.jsp"></c:import>
 <div class="totalbody">
 	<div class="title">
-		<h1>My Page</h1>&nbsp;&nbsp;<h5>³» ÀÛÇ° ÆÇ¸Å½ÂÀÎ ¿äÃ»</h5>
+		<h1>My Page</h1>&nbsp;&nbsp;<h5>ë‚´ ì‘í’ˆ íŒë§¤ìŠ¹ì¸ ìš”ì²­</h5>
 	</div>
 	<form action="mypageSalesRequestViewUpdate.mypage" method="post" id="frm" enctype="multipart/form-data">
 		<input type="hidden" name="work_seq" value="${requestScope.work.work_seq}">
 		<table class="table">
 			<tr>
-				<td rowspan="9" colspan="2">
+				<td rowspan="10" colspan="2">
 					<img id="imagebox" src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name}">
 				</td>
 			</tr>
 			<tr>
-				<td>ÀÛÇ°¸í</td>
-				<td><input name="work" type="text" value="${requestScope.work.work}"></td>
+				<td>ì‘í’ˆëª…</td>
+				<td><input class="border" name="work" type="text" value="${requestScope.work.work}"></td>
 			</tr>
 			<tr>
-				<td>½ÂÀÎÇöÈ²</td>
+				<td>ìŠ¹ì¸í˜„í™©</td>
 				<td><input name="upload_check" type="text" readonly="readonly" value="${requestScope.work.upload_check}"></td>
 			</tr>
 			<tr>
-				<td>ÀÛ°¡¸í</td>
+				<td>ì‘ê°€ëª…</td>
 				<td><input name="nickname" type="text" readonly="readonly" value="${requestScope.work.nickname}"></td>
 			</tr>
 			<tr>
-				<td>µî·Ï ÀÏÀÚ</td>
+				<td>ë“±ë¡ ì¼ì</td>
 				<td><input name="work_date" type="date" readonly="readonly" value="${requestScope.work.work_date }"></td>
 			</tr>
 			<tr>
-				<td>°¡°İ</td>
-				<td><input name="price" type="text" value="${requestScope.work.price}"></td>
+				<td>ê°€ê²©</td>
+				<td><input class="border" name="price" type="text" value="${requestScope.work.price}"></td>
 			</tr>
 			<tr>
-				<td>ÆÄÀÏ ¾÷·Îµå</td>
+				<td>íŒŒì¼ ì—…ë¡œë“œ</td>
 				<td><input type="file" id="file" name="file"></td>
 			</tr>
 			<tr>
-				<td>ÆÄÀÏ »çÀÌÁî</td>
+				<td>íŒŒì¼ ì‚¬ì´ì¦ˆ</td>
 				<td><input class="size" id="fileWidth" name="width" type="text" readonly="readonly" value="${requestScope.file.width }"> X <input class="size" id="fileHeight" name="height" type="text"readonly="readonly" value="${requestScope.file.height}"></td>
 			</tr>
 			<tr>
-				<td>»ó¼¼ ³»¿ë</td>
-				<td><textarea name="contents">${requestScope.work.contents}</textarea></td>
+				<td>ìƒì„¸ ë‚´ìš©</td>
+				<td><textarea class="border" name="contents">${requestScope.work.contents}</textarea></td>
 			</tr>
 			<tr>
-				<td>ÅÂ±×</td>
-				<td><textarea name="tag">${requestScope.work.tag}</textarea></td>
+				<td>íƒœê·¸</td>
+				<td><textarea class="border" name="tag">${requestScope.work.tag}</textarea></td>
 			</tr>
 		</table>
 		<c:if test="${requestScope.work.reply ne null}">
@@ -108,7 +112,7 @@ $(function(){
 				<textarea name="reply" readonly="readonly">${requestScope.work.reply }</textarea>
 			</div>		
 		</c:if>
-		<button class="btn btn-default">UPDATE</button>
+		<button class="bloat btn btn-default">UPDATE</button>
 	</form>
 </div>
 <div class="push"></div>

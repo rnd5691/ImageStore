@@ -1,5 +1,6 @@
 package com.imagestore.mypage.service;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -27,6 +28,14 @@ public class SalesRequestViewUpdateService implements Action {
 		WorkDTO workDTO = null;
 		FileDTO fileDTO = null;
 		Connection con = null;
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		if(request.getMethod()=="POST") {
 			String savePath = request.getServletContext().getRealPath("upload");

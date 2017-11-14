@@ -79,7 +79,6 @@ public class SalesRequestWriteService implements Action {
 				workDTO.setTag(multi.getParameter("tag"));
 				workDTO.setPrice(Integer.parseInt(multi.getParameter("price")));
 				workDTO.setContents(multi.getParameter("contents"));
-				workDTO.setReply("N");
 				workDTO.setSell("N");
 				
 				result = workDAO.insert(workDTO, con);

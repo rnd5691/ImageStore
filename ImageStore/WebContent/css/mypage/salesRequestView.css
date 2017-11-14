@@ -28,3 +28,7 @@ td>textarea, div>textarea{
 .reply{
 	margin-bottom: 20px;
 }
+.bloat {
+	float: right;
+	margin-left: 5px;
+}
