@@ -33,6 +33,8 @@
 		<div class="title">
 			<h1>My Page</h1>&nbsp;&nbsp;<h5>구매 목록</h5>
 		</div>
+		<input type="hidden" id="user_num" name="user_num" value="${sessionScope.member.user_num}">
+		
 		<div>
 			<table class="table table-hover">
 					<tr class="table-title">
@@ -56,15 +58,15 @@
 					<div class="paging">
 						<ul class="pagination">
 							<c:if test="${makePage.curBlock>1}">
-								<li><a href="./mypageBuyList.mypage?curPage=1">&lt;&lt;</a></li>
-								<li><a href="./mypageBuyList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=1&user_num=${member.user_num}">&lt;&lt;</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=${makePage.startNum-1}&user_num=${member.user_num}">[이전]</a></li>
 							</c:if>
 							<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-								<li><a href="./mypageBuyList.mypage?curPage${i}">${i}</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=${i}&user_num=${member.user_num}">${i}</a></li>
 							</c:forEach>
 							<c:if test="${makePage.curBlock < makePage.totalBlock}">
-								<li><a href="./mypageBuyList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
-								<li><a href="./mypageBuyList.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=${makePage.lastNum+1}&user_num=${member.user_num}">[다음]</a></li>
+								<li><a href="./mypageBuyList.mypage?curPage=${makePage.totalPage}&user_num=${member.user_num}">&gt;&gt;</a></li>
 							</c:if>
 						</ul>
 					</div>

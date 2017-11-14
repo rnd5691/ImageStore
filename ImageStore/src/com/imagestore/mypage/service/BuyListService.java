@@ -27,14 +27,19 @@ public class BuyListService implements Action {
 		try{
 			curPage = Integer.parseInt(request.getParameter("curPage"));
 		}catch(Exception e){
+			curPage=1;
 		}
 		
 		int totalCount = 0;
 		
+		int user_num = Integer.parseInt(request.getParameter("user_num"));
+		
+		
 		try{
-			totalCount = buyDAO.getTotalCount();
+			totalCount = buyDAO.getTotalCount(memberDTO.getUser_num());
 			PageMaker pageMaker = new PageMaker(curPage, totalCount);
-			List<BuyDTO> ar = buyDAO.selectList(memberDTO.getUser_num());
+			List<BuyDTO> ar = buyDAO.selectList(user_num, pageMaker.getMakeRow());
+			
 			request.setAttribute("list", ar);
 			request.setAttribute("makePage", pageMaker.getMakePage());
 		}catch(Exception e){

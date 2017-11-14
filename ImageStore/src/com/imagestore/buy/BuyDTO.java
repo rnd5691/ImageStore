@@ -3,11 +3,26 @@ package com.imagestore.buy;
 import java.sql.Date;
 
 public class BuyDTO {
-	private int buy_seq;//순서
+	private int buy_seq;//순서3
+	private int user_num;//회원번호
 	private String nickname;//작가명
 	private String work;//작품명
+	private int file_num;//파일번호
 	private Date buy_date;//구매일자
 	private int price; //구매금액
+	
+	public int getUser_num() {
+		return user_num;
+	}
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
+	}
+	public int getFile_num() {
+		return file_num;
+	}
+	public void setFile_num(int file_num) {
+		this.file_num = file_num;
+	}
 	public int getBuy_seq() {
 		return buy_seq;
 	}
