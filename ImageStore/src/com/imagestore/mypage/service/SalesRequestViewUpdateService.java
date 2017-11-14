@@ -37,7 +37,8 @@ public class SalesRequestViewUpdateService implements Action {
 			e1.printStackTrace();
 		}
 		
-		if(request.getMethod()=="POST") {
+		if(request.getMethod().equals("POST")) {
+			System.out.println("post로 옴");
 			String savePath = request.getServletContext().getRealPath("upload");
 			int sizeLimit = 1024*1024*10;//10MB 파일크기제한
 			System.out.println("savePath :"+savePath);
@@ -85,6 +86,7 @@ public class SalesRequestViewUpdateService implements Action {
 				con.close();
 			}
 		} else {
+			System.out.println("get으로 옴");
 			int work_seq = Integer.parseInt(request.getParameter("work_seq"));
 			try {
 				con = DBConnector.getConnect();
@@ -103,7 +105,6 @@ public class SalesRequestViewUpdateService implements Action {
 			}
 			actionFoward.setCheck(true);
 			actionFoward.setPath("../WEB-INF/view/MYPAGE/salesRequestViewUpdate.jsp");
-			return actionFoward;
 		}
 		return actionFoward;
 	}

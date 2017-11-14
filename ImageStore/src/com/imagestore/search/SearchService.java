@@ -1,7 +1,6 @@
 package com.imagestore.search;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
-import com.imagestore.file.FileDAO;
 import com.imagestore.file.FileDTO;
 import com.imagestore.util.DBConnector;
 import com.imagestore.work.WorkDAO;
@@ -39,7 +37,7 @@ public class SearchService implements Action {
 				String[] tag = ar.get(i).getTag().split(",");
 				for(int j=0; j<tag.length; j++) {
 					System.out.println("tag["+j+"]"+tag[j]);
-					if(tag[j].trim().equals(search)) {
+					if(tag[j].equals(search)) {
 						fileName = workDAO.seachWorkSEQ(con, tag[j]);
 					}
 				}

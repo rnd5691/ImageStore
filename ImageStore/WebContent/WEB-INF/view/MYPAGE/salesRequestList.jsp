@@ -53,21 +53,23 @@
 					</c:forEach>
 				</table>
 				
-				<div class="paging">
-					<ul class="pagination">
-						<c:if test="${makePage.curBlock>1}">
-							<li><a href="./mypageSalesRequestList.mypage?curPage=1">&lt;&lt;</a></li>
-							<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
-						</c:if>
-						<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-							<li><a href="./mypageSalesRequestList.mypage?curPage=${i}">${i}</a></li>
-						</c:forEach>
-						<c:if test="${makePage.curBlock < makePage.totalBlock}">
-							<li><a href="./mypageSalesRequestList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
-							<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
-						</c:if>
-					</ul>
-				</div>
+				<c:if test="${makePage.totalPage > 0}">
+					<div class="paging">
+						<ul class="pagination">
+							<c:if test="${makePage.curBlock>1}">
+								<li><a href="./mypageSalesRequestList.mypage?curPage=1">&lt;&lt;</a></li>
+								<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
+							</c:if>
+							<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
+								<li><a href="./mypageSalesRequestList.mypage?curPage=${i}">${i}</a></li>
+							</c:forEach>
+							<c:if test="${makePage.curBlock < makePage.totalBlock}">
+								<li><a href="./mypageSalesRequestList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>
+								<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.totalPage}">&gt;&gt;</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</c:if>	
 				<c:if test="${sessionScope.member ne null}">
 					<a  id="btn" href="mypageSalesRequestWrite.mypage" class="btn btn-default">WRITE</a>
 				</c:if>	

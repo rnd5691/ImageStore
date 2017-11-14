@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>내 작품 판매 승인 현황</title>
+<title>작품 별 수익 현황</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -72,23 +72,24 @@ $(function(){
 				</c:forEach>
 				
 			</table>
-			
-			<div class="paging">
-				<ul class="pagination">
-				<c:if test="${makePage.curBlock>1}">
-						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${1}&user_num=${member.user_num}">&lt;&lt;</a></li>
-						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.startNum-1}&user_num=${member.user_num}">[이전]</a></li>
-					</c:if>
-					<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${i}&user_num=${member.user_num}">${i}</a></li>
-					</c:forEach>
-					<c:if test="${makePage.curBlock < makePage.totalBlock}">
-						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.lastNum+1}&user_num=${member.user_num}">[다음]</a></li>
-						<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.totalPage}&user_num=${member.user_num}">&gt;&gt;</a></li>
-					</c:if>
-					
-				</ul>
-			</div>
+			<c:if test="${makePage.totalPage > 0}">
+				<div class="paging">
+					<ul class="pagination">
+					<c:if test="${makePage.curBlock>1}">
+							<li><a href="./mypageSalesRequestMoney.mypage?curPage=${1}&user_num=${member.user_num}">&lt;&lt;</a></li>
+							<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.startNum-1}&user_num=${member.user_num}">[이전]</a></li>
+						</c:if>
+						<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
+							<li><a href="./mypageSalesRequestMoney.mypage?curPage=${i}&user_num=${member.user_num}">${i}</a></li>
+						</c:forEach>
+						<c:if test="${makePage.curBlock < makePage.totalBlock}">
+							<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.lastNum+1}&user_num=${member.user_num}">[다음]</a></li>
+							<li><a href="./mypageSalesRequestMoney.mypage?curPage=${makePage.totalPage}&user_num=${member.user_num}">&gt;&gt;</a></li>
+						</c:if>
+						
+					</ul>
+				</div>
+			</c:if>
 			
 		</div>
 	</div>

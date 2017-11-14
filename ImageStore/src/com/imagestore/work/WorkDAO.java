@@ -13,13 +13,13 @@ import com.imagestore.util.MakeRow;
 public class WorkDAO {
 	
 	//salesReuqestViewDelete
-		public void salesRequestViewDelete(int work_seq, Connection con) throws Exception {
+	public void salesRequestViewDelete(int work_seq, Connection con) throws Exception {
 			String sql = "DELETE work_info WHERE work_seq=?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, work_seq);
 			st.executeUpdate();
 			st.close();
-		}
+	}
 	
 	//viewUpdate
 	public int salesViewUpdate(WorkDTO workDTO, Connection con) throws Exception {

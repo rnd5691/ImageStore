@@ -242,7 +242,7 @@
       <div id="flex-image2" class="flex-image2">
       	<c:forEach items="${requestScope.author}" var="author">
       		<div class="item item${author.file_num}">
-      			<img src="${pageContext.request.contextPath}/upload/${author.file_name}">
+      			<a href="searchView.search?work_seq=${author.work_seq}"><img src="${pageContext.request.contextPath}/upload/${author.file_name}"></a>
       		</div>
       	</c:forEach>
 	   </div>

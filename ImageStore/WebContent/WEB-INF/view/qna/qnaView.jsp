@@ -39,6 +39,7 @@
 <!-- header finish -->
 
 <!-- contents start -->
+<c:if test="${!empty requestScope.qna }">
 <body>
 <div class="body">
 	<div class="qnaTitle">
@@ -82,6 +83,13 @@
 	</form>
 	<div class="push"></div>
 </div>
+</c:if>
+<c:if test="${empty requestScope.qna}">
+	<script type="text/javascript">
+		alert('해당 하는 번호가 없습니다.');
+		location.href="qnaList.qna";
+	</script>
+</c:if>
 <!-- contents finish -->
 
 <!-- footer start -->

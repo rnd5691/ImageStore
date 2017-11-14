@@ -62,7 +62,7 @@ $(function(){
 	<div class="title">
 		<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청</h5>
 	</div>
-	<form action="mypageSalesRequestViewUpdate.mypage" method="post" id="frm" enctype="multipart/form-data">
+	<form action="mypageSalesRequestViewUpdate.mypage" id="frm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="work_seq" value="${requestScope.work.work_seq}">
 		<table class="table">
 			<tr>
@@ -107,7 +107,7 @@ $(function(){
 				<td><textarea class="border" name="tag">${requestScope.work.tag}</textarea></td>
 			</tr>
 		</table>
-		<c:if test="${requestScope.work.reply ne null}">
+		<c:if test="${!empty requestScope.work.reply}">
 			<div class="reply">
 				<textarea name="reply" readonly="readonly">${requestScope.work.reply }</textarea>
 			</div>		
