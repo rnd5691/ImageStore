@@ -60,7 +60,7 @@
 							<li><a href="./mypageSalesRequestList.mypage?curPage=${makePage.startNum-1}">[이전]</a></li>
 						</c:if>
 						<c:forEach begin="${makePage.startNum}" end="${makePage.lastNum}" var="i">
-							<li><a href="./mypageSalesRequestList.mypage?curPage${i}">${i}</a></li>
+							<li><a href="./mypageSalesRequestList.mypage?curPage=${i}">${i}</a></li>
 						</c:forEach>
 						<c:if test="${makePage.curBlock < makePage.totalBlock}">
 							<li><a href="./mypageSalesRequestList.mypage?curPage=${requestScope.makePage.getLastNum()+1}">[다음]</a></li>

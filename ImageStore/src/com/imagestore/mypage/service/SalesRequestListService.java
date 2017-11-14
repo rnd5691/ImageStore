@@ -31,7 +31,7 @@ public class SalesRequestListService implements Action {
 		int totalCount = 0;
 		
 		try{
-			totalCount = workDAO.getTotalCount();
+			totalCount = workDAO.getTotalCount(memberDTO.getUser_num());
 			PageMaker pageMaker = new PageMaker(curPage, totalCount);
 			List<WorkDTO> ar = workDAO.selectList(memberDTO.getUser_num(), pageMaker.getMakeRow());
 			request.setAttribute("list", ar);
