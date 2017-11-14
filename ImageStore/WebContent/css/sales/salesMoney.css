@@ -54,3 +54,15 @@ h4	{
 .tdtable2	{
 	text-align: center;
 }
+
+#totalfile	{
+	text-align: right;
+}
+
+#totalMoney	{
+	text-align: right;
+}
+
+.paging	{
+	text-align: center;
+}
