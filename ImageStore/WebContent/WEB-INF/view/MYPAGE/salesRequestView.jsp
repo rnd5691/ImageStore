@@ -47,6 +47,7 @@
 	</div>
 	<form method="get" id="frm">
 		<input type="hidden" name="work_seq" value="${requestScope.work.work_seq}">
+		<input type="hidden" name="file_kind" value="${requestScope.file.file_kind}">
 		<table class="table">
 			<tr>
 				<td rowspan="9" colspan="2">

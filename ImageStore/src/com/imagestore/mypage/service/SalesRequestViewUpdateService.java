@@ -73,6 +73,7 @@ public class SalesRequestViewUpdateService implements Action {
 					fileDTO.setFile_route(savePath);
 					fileDTO.setWidth(multi.getParameter("width"));
 					fileDTO.setHeight(multi.getParameter("height"));
+					fileDTO.setFile_kind(multi.getParameter("file_kind"));
 				}
 				result = fileDAO.salesRequestViewUpdate(fileDTO, con);
 				
