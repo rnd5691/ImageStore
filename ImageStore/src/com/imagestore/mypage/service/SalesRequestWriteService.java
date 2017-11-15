@@ -53,9 +53,12 @@ public class SalesRequestWriteService implements Action {
 			WorkDAO workDAO = new WorkDAO();
 			PersonDAO personDAO = new PersonDAO();
 			
+			
+			
 			int result = 0;
 			String fileName = null;
 			Connection con = null;
+			String extension = null;
 			try {
 				MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
 				Enumeration files = multi.getFileNames();
@@ -64,6 +67,9 @@ public class SalesRequestWriteService implements Action {
 					
 					fileName = multi.getFilesystemName(fileName);
 				}
+				//파일 확장자구분
+				 int index = fileName.lastIndexOf(".");
+				 extension = fileName.substring(index);
 				//찾아온다!
 				String writer = personDAO.selectWriter(memberDTO.getUser_num());
 				//커넥션
@@ -83,6 +89,12 @@ public class SalesRequestWriteService implements Action {
 				
 				result = workDAO.insert(workDTO, con);
 				System.out.println("Work-seq : "+workDTO.getWork_seq());
+				//파일확장자 구분
+				if(extension.equals(".mp4") || extension.equals(".avi") || extension.equals(".flv")) {
+					extension = "video";
+				} else {
+					extension = "image";
+				}
 				//파일 테이블
 				fileDTO.setFile_name(fileName);
 				fileDTO.setWork_seq(seq);
@@ -90,10 +102,10 @@ public class SalesRequestWriteService implements Action {
 				fileDTO.setWidth(multi.getParameter("width"));
 				fileDTO.setHeight(multi.getParameter("height"));
 				fileDTO.setFile_route(savePath);
+				fileDTO.setFile_kind(extension);
 				result = fileDAO.fileUpload(request, response, fileDTO, con);
+				
 				con.commit();
-				
-				
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -102,7 +114,7 @@ public class SalesRequestWriteService implements Action {
 				con.setAutoCommit(true);
 				con.close();
 			}
-	
+			
 			if(result>0){
 				actionFoward.setCheck(true);
 				actionFoward.setPath("mypageSalesRequestList.mypage");

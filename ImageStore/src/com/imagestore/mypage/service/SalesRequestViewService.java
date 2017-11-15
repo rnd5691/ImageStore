@@ -32,6 +32,8 @@ public class SalesRequestViewService implements Action {
 				FileDAO fileDAO = new FileDAO();
 				fileDTO = fileDAO.selectOne(work_seq, con);
 				System.out.println("파일DTO : "+fileDTO);
+			
+				
 				con.commit();
 			}catch(Exception e){
 				e.printStackTrace();
@@ -40,6 +42,7 @@ public class SalesRequestViewService implements Action {
 				con.setAutoCommit(true);
 				con.close();
 			}
+			
 			request.setAttribute("file", fileDTO);
 			request.setAttribute("work", workDTO);
 		

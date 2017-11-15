@@ -103,6 +103,7 @@ public class WorkDAO {
 				fileDTO = new FileDTO();
 				fileDTO.setWork_seq(rs.getInt("work_seq"));
 				fileDTO.setFile_name(rs.getString("file_name"));
+				fileDTO.setFile_kind(rs.getString("file_kind"));
 				ar.add(fileDTO);
 			}
 			rs.close();

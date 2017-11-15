@@ -1,6 +1,7 @@
 package com.imagestore.search;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
+import com.imagestore.file.FileDAO;
 import com.imagestore.file.FileDTO;
 import com.imagestore.util.DBConnector;
 import com.imagestore.work.WorkDAO;
@@ -19,6 +21,7 @@ public class SearchService implements Action {
 	public ActionFoward doProcess(HttpServletRequest request, HttpServletResponse response) {
 		ActionFoward actionFoward = new ActionFoward();
 		WorkDAO workDAO = new WorkDAO();
+		FileDAO fileDAO = new FileDAO();
 		
 		String search = request.getParameter("search");
 		int perPage = Integer.parseInt(request.getParameter("perPage"));
@@ -26,18 +29,26 @@ public class SearchService implements Action {
 		String kind = request.getParameter("kind");
 		String check = request.getParameter("check");
 		
+		System.out.println("select : "+select);
+		
+		
+		
 		List<WorkDTO> ar = null;
 		List<FileDTO> fileName = null;
+		FileDTO fileDTO = null;
 		try {
 			Connection con = DBConnector.getConnect();
 			con.setAutoCommit(false);
 			ar = workDAO.selectAll(con);
 			
 			for(int i=0; i<ar.size(); i++) {
+				fileDTO = new FileDTO();
 				String[] tag = ar.get(i).getTag().split(",");
+				fileDTO = fileDAO.selectOne(ar.get(i).getWork_seq(), con);
 				for(int j=0; j<tag.length; j++) {
 					System.out.println("tag["+j+"]"+tag[j]);
-					if(tag[j].equals(search)) {
+					System.out.println("fileDTO : "+fileDTO.getFile_kind()); 
+					if(tag[j].trim().equals(search) && fileDTO.getFile_kind().equals(select)) {
 						fileName = workDAO.seachWorkSEQ(con, tag[j]);
 					}
 				}

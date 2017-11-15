@@ -104,7 +104,7 @@ $(function() {
 		<input type="hidden" name="perPage" value="1">
 		<input type="hidden" name="check" value=true>
 		<select id="select" name="select" class="form-control">
-			<option value="">사진</option>
+			<option value="image">사진</option>
 			<option value="video">비디오</option>
 		</select>
 		<input type="button" class="btn btn-default" id="btn">

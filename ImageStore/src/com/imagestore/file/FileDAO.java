@@ -51,6 +51,7 @@ public class FileDAO {
 			fileDTO.setFile_name(rs.getString("file_name"));
 			fileDTO.setWidth(rs.getString("width"));
 			fileDTO.setHeight(rs.getString("height"));
+			fileDTO.setFile_kind(rs.getString("file_kind"));
 		}
 		rs.close();
 		st.close();
@@ -59,13 +60,14 @@ public class FileDAO {
 	
 	//fileUpload
 		public int fileUpload(HttpServletRequest request, HttpServletResponse response, FileDTO fileDTO,Connection con) throws Exception {
-			String sql = "INSERT INTO file_table VALUES(file_num.nextval,?,?,?,?,?)";
+			String sql = "INSERT INTO file_table VALUES(file_num.nextval,?,?,?,?,?,?)";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, fileDTO.getWork_seq());
 			st.setString(2, fileDTO.getFile_route());
 			st.setString(3, fileDTO.getFile_name());
 			st.setString(4, fileDTO.getWidth());
 			st.setString(5, fileDTO.getHeight());
+			st.setString(6, fileDTO.getFile_kind());
 			int result = st.executeUpdate();
 			st.close();
 			return result;

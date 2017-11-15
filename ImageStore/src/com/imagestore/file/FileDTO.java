@@ -6,7 +6,14 @@ public class FileDTO {
 	private String file_route;
 	private String width;
 	private String height;
+	private String file_kind;
 	
+	public String getFile_kind() {
+		return file_kind;
+	}
+	public void setFile_kind(String file_kind) {
+		this.file_kind = file_kind;
+	}
 	public int getWork_seq() {
 		return work_seq;
 	}
