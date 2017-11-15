@@ -1,7 +1,6 @@
 package com.imagestore.mypage.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,7 @@ public class SalesRequestMoneyService implements Action {
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		WorkDAO workDAO = new WorkDAO();
-		WorkDTO workDTO = new WorkDTO();
+		
 		int curPage=1;
 		
 		try {
@@ -42,13 +41,13 @@ public class SalesRequestMoneyService implements Action {
 		try {
 			user_num = Integer.parseInt(request.getParameter("user_num"));
 			
-			totalCount = workDAO.getTotalCount(user_num);
+			totalCount = workDAO.getTotalCount(user_num, "승인");
 			
 			workTotalCount = workDAO.workTotalCount(user_num);
 			
 			PageMaker pageMaker = new PageMaker(curPage, totalCount);
 			
-			List<WorkDTO> ar = workDAO.selectList(memberDTO.getUser_num(), pageMaker.getMakeRow());
+			List<WorkDTO> ar = workDAO.MoneySelectList(memberDTO.getUser_num(), pageMaker.getMakeRow());
 			totalMoney = workDAO.totalMoney(user_num);
 			request.setAttribute("totalMoney", totalMoney);
 			request.setAttribute("workTotal", workTotalCount);

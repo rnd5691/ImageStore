@@ -16,9 +16,23 @@
 $(function(){
 	$("#salesRequestList").css('color', 'white');
 	$("#salesRequestList").css('background-color', '#83b14e');
+	var check = false;
+	$("#work").change(function(){
+		check = true;
+	});
 	
+	$("#price").change(function(){
+		check = true;
+	});
+	$("#contents").change(function(){
+		check = true;
+	});
+	$("#tag").change(function(){
+		check = true;
+	});
 	//파일 사이즈 체크
 	$("#file").change(function(){
+		check=true;
 		if($(this).val() != ""){
 			var file = this.files[0]; // files 를 사용하면 파일의 정보를 알 수 있음
 			// file 은 배열 형태이므로 file[0] 처럼 접근해야함
@@ -38,6 +52,16 @@ $(function(){
 			}
 		}
 	});
+	
+	$("#update").click(function(){
+		if(check==false){
+			alert('변경 사항이 없습니다.');
+		}else{
+			$("#frm").prop("action", "mypageSalesRequestViewUpdate.mypage");
+			$("#frm").submit();
+		}
+	});
+	
 });
 </script>
 <style type="text/css">
@@ -62,17 +86,25 @@ $(function(){
 	<div class="title">
 		<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청</h5>
 	</div>
-	<form action="mypageSalesRequestViewUpdate.mypage" id="frm" method="post" enctype="multipart/form-data">
+	<form id="frm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="work_seq" value="${requestScope.work.work_seq}">
+		<input type="hidden" name="file_kind" value="${requestScope.file.file_kind}">
 		<table class="table">
-			<tr>
-				<td rowspan="10" colspan="2">
-					<img id="imagebox" src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name}">
-				</td>
-			</tr>
+			 <tr>
+         		<c:if test="${requestScope.file.file_kind eq 'image'}">
+            		<td rowspan="10" colspan="2">
+						<img src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name}">
+					</td>
+				</c:if>
+				<c:if test="${requestScope.file.file_kind eq 'video'}">
+					<td rowspan="9" colspan="2">
+						<video src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name} " width="310" height="310" controls="controls"></video>
+					</td>
+				</c:if>
+         	</tr>
 			<tr>
 				<td>작품명</td>
-				<td><input class="border" name="work" type="text" value="${requestScope.work.work}"></td>
+				<td><input id="work"class="border" name="work" type="text" value="${requestScope.work.work}"></td>
 			</tr>
 			<tr>
 				<td>승인현황</td>
@@ -88,23 +120,25 @@ $(function(){
 			</tr>
 			<tr>
 				<td>가격</td>
-				<td><input class="border" name="price" type="text" value="${requestScope.work.price}"></td>
+				<td><input id="price" class="border" name="price" type="text" value="${requestScope.work.price}"></td>
 			</tr>
 			<tr>
 				<td>파일 업로드</td>
 				<td><input type="file" id="file" name="file"></td>
 			</tr>
-			<tr>
-				<td>파일 사이즈</td>
-				<td><input class="size" id="fileWidth" name="width" type="text" readonly="readonly" value="${requestScope.file.width }"> X <input class="size" id="fileHeight" name="height" type="text"readonly="readonly" value="${requestScope.file.height}"></td>
-			</tr>
+			<c:if test="${requestScope.file.file_kind eq 'image'}">
+		         <tr>
+		            <td>파일 사이즈</td>
+		            <td><input class="size" name="width" type="text" readonly="readonly" value="${requestScope.file.width }"> X <input class="size" name="height" type="text"readonly="readonly" value="${requestScope.file.height}"></td>
+		         </tr>
+	     	</c:if>
 			<tr>
 				<td>상세 내용</td>
-				<td><textarea class="border" name="contents">${requestScope.work.contents}</textarea></td>
+				<td><textarea id="contents" class="border" name="contents">${requestScope.work.contents}</textarea></td>
 			</tr>
 			<tr>
 				<td>태그</td>
-				<td><textarea class="border" name="tag">${requestScope.work.tag}</textarea></td>
+				<td><textarea id="tag" class="border" name="tag">${requestScope.work.tag}</textarea></td>
 			</tr>
 		</table>
 		<c:if test="${!empty requestScope.work.reply}">
@@ -112,7 +146,8 @@ $(function(){
 				<textarea name="reply" readonly="readonly">${requestScope.work.reply }</textarea>
 			</div>		
 		</c:if>
-		<button class="bloat btn btn-default">UPDATE</button>
+		<input type="button" id="update" class="bloat btn btn-default" value="UPDATE">
+		
 	</form>
 </div>
 <div class="push"></div>

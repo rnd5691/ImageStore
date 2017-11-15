@@ -16,31 +16,20 @@
 	$(function(){
 		$("#salesRequestList").css('color', 'white');
 		$("#salesRequestList").css('background-color', '#83b14e');
-		var fileSize = 0;
+		
 		$("#file").change(function(){
 			if($(this).val() != ""){
 				var file = this.files[0]; // files 를 사용하면 파일의 정보를 알 수 있음
 				// file 은 배열 형태이므로 file[0] 처럼 접근해야함
 				var _URL = window.URL || window.webkitURL;
 				var img = new Image();
-				
-				fileSize = file.size
-				
+					
 				img.src = _URL.createObjectURL(file);
 				img.onload = function(){
 				 	$("#fileWidth").val(img.naturalWidth);
 					$("#fileHeight").val(img.naturalHeight);
 				}
 			}
-		});
-		
-		$("#btn").click(function(){
-			if(fileSize>1024*1024*10){
-				alert("사진 및 동영상은 10MB까지 업로드 가능합니다.");
-				
-			} else {
-				$("#frm").submit();
-			}		
 		});
 	});
 </script>
@@ -57,7 +46,7 @@
 		<div class="title">
 			<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청 작성</h5>
 		</div>
-		<form action="mypageSalesRequestWrite.mypage" id="frm" method="post" enctype="multipart/form-data">
+		<form action="mypageSalesRequestWrite.mypage" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="nickname" value="${requestScope.nickname}">
 			<table class="table table-hover">
 				<tr>
@@ -84,7 +73,7 @@
 				</tr>
 			</table>
 			<div class="button">
-				<input type="button" id="btn" class="btn btn-default" value="등록">
+				<button class="btn btn-default">등록</button>
 			</div>
 		</form>
 	</div>

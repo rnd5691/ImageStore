@@ -11,7 +11,35 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class WorkDAO {
-	
+	//관리자 승인시 업데이트
+	public int approvalUpdate(int work_seq) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "update work_info set upload_check='승인', sell='Y' where work_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, work_seq);
+		
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		
+		return result;
+	}
+	//관리자 거부시 업데이트
+	public int replyUpdate(WorkDTO workDTO) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "update work_info set reply=?, upload_check='거부' where work_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, workDTO.getReply());
+		st.setInt(2, workDTO.getWork_seq());
+		
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		
+		return result;
+	}
 	//salesReuqestViewDelete
 	public void salesRequestViewDelete(int work_seq, Connection con) throws Exception {
 			String sql = "DELETE work_info WHERE work_seq=?";
@@ -23,7 +51,7 @@ public class WorkDAO {
 	
 	//viewUpdate
 	public int salesViewUpdate(WorkDTO workDTO, Connection con) throws Exception {
-		String sql = "UPDATE work_info SET work=?, work_date=sysdate, tag=?, price=?, contents=? WHERE work_seq=?";
+		String sql = "UPDATE work_info SET work=?, work_date=sysdate, tag=?, price=?, contents=?, upload_check='대기중', reply=null WHERE work_seq=?";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, workDTO.getWork());
 		st.setString(2, workDTO.getTag());
@@ -76,7 +104,7 @@ public class WorkDAO {
 	public int workTotalCount(int user_num) throws Exception	{
 		Connection con = DBConnector.getConnect();
 		
-		String sql = "select count(*) from work_info where user_num=?";
+		String sql = "select count(*) from work_info where user_num=? and upload_check='승인'";
 		PreparedStatement st = con.prepareStatement(sql);
 		
 		st.setInt(1, user_num);
@@ -184,6 +212,68 @@ public class WorkDAO {
 		
 		return workDTO;
 	}
+	public List<WorkDTO> adminSelectList(MakeRow makeRow) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select * from "
+				+	"(select rownum R, Q.* from "
+				+   "(select * from work_info where upload_check='대기중' order by work_seq desc) Q) "
+				+   "where R between ? and ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, makeRow.getStartRow());
+		st.setInt(2, makeRow.getLastRow());
+		
+		ResultSet rs = st.executeQuery();
+		List<WorkDTO> ar = new ArrayList<>();
+		while(rs.next()){
+			WorkDTO workDTO = new WorkDTO();
+			workDTO.setWork_seq(rs.getInt("work_seq"));
+			workDTO.setWork(rs.getString("work"));
+			workDTO.setNickname(rs.getString("nickname"));
+			workDTO.setWork_date(rs.getDate("work_date"));
+			workDTO.setUpload_check(rs.getString("upload_check"));
+			workDTO.setDownload_hit(rs.getInt("download_hit"));
+			workDTO.setPrice(rs.getInt("price"));
+			
+			ar.add(workDTO);
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+		
+		return ar;
+	}
+	
+	public List<WorkDTO> MoneySelectList(int user_num, MakeRow makeRow) throws Exception{
+		Connection con = DBConnector.getConnect();
+		String sql = "select * from "
+				+	"(select rownum R, Q.* from "
+				+   "(select * from work_info where user_num=? and upload_check='승인' order by work_seq desc) Q) "
+				+   "where R between ? and ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, user_num);
+		st.setInt(2, makeRow.getStartRow());
+		st.setInt(3, makeRow.getLastRow());
+		
+		ResultSet rs = st.executeQuery();
+		List<WorkDTO> ar = new ArrayList<>();
+		while(rs.next()){
+			WorkDTO workDTO = new WorkDTO();
+			workDTO.setWork_seq(rs.getInt("work_seq"));
+			workDTO.setWork(rs.getString("work"));
+			workDTO.setNickname(rs.getString("nickname"));
+			workDTO.setWork_date(rs.getDate("work_date"));
+			workDTO.setUpload_check(rs.getString("upload_check"));
+			workDTO.setDownload_hit(rs.getInt("download_hit"));
+			workDTO.setPrice(rs.getInt("price"));
+			
+			ar.add(workDTO);
+		}
+		
+		DBConnector.disConnect(rs, st, con);
+		
+		return ar;
+	}
 	
 	public List<WorkDTO> selectList(int user_num, MakeRow makeRow) throws Exception{
 		Connection con = DBConnector.getConnect();
@@ -217,7 +307,7 @@ public class WorkDAO {
 		return ar;
 	}
 	
-	public int getTotalCount() throws Exception{
+	/*public int getTotalCount() throws Exception{
 		Connection con = DBConnector.getConnect();
 		String sql = "select count(nvl(work_seq, 0)) from work_info";
 		PreparedStatement st = con.prepareStatement(sql);
@@ -227,8 +317,34 @@ public class WorkDAO {
 		DBConnector.disConnect(rs, st, con);
 		
 		return result;
+	}*/
+	//관리자 작품승인요청에 사용될 totalCount
+	public int getTotalCount() throws Exception	{
+		Connection con = DBConnector.getConnect();
+		String sql = "select count(nvl(work_seq, 0)) from work_info where upload_check='대기중'";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		int result = rs.getInt(1);
+		DBConnector.disConnect(rs, st, con);
+		
+		return result;
 	}
-	
+	//수익현황에 사용될 totalCount
+	public int getTotalCount(int user_num, String check) throws Exception	{
+		Connection con = DBConnector.getConnect();
+		String sql = "select count(nvl(work_seq, 0)) from work_info where user_num=? and upload_check=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, user_num);
+		st.setString(2, check);
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		int result = rs.getInt(1);
+		DBConnector.disConnect(rs, st, con);
+		
+		return result;
+	}
 	//총 내 작품에 쓰이는 토탈카운트 메소드
 	public int getTotalCount(int user_num) throws Exception	{
 		Connection con = DBConnector.getConnect();

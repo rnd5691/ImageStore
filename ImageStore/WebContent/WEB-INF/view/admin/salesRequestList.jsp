@@ -4,34 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>내 작품 판매 승인 현황</title>
+<title>작품 판매 승인 요청</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/mypage/mypage.css" rel="stylesheet">
 <link href="../css/mypage/List.css" rel="stylesheet">
-<script type="text/javascript">
-	$(function(){
-		$("#salesRequestList").css('color', 'white');
-		$("#salesRequestList").css('background-color', '#83b14e');
-	});
-</script>
+<link href="../css/admin/sales.css" rel="stylesheet">
 </head>
 <body>
 <!-- header start -->
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="./header.jsp"></c:import>
 <!-- header finish -->
 
 <!-- contents start -->
-<!-- menu는 mypage나 구매목록이 나오는 탭 부분 -->
 
 <div class="body">
-	<c:import url="./menu.jsp"></c:import>
 	<div class="totalbody">
 		<div class="title">
-			<h1>My Page</h1>&nbsp;&nbsp;<h5>내 작품 판매승인 요청 List</h5>
+			<h1>작품 판매승인 요청</h1>
 		</div>
 		<div>
 				<table class="table table-hover">
@@ -53,8 +47,6 @@
 					</c:forEach>
 				</table>
 				
-				<a  id="btn" href="mypageSalesRequestWrite.mypage" class="btn btn-default">WRITE</a>
-				
 				<c:if test="${makePage.totalPage > 0}">
 					<div class="paging">
 						<ul class="pagination">
@@ -72,7 +64,6 @@
 						</ul>
 					</div>
 				</c:if>	
-					
 			</div>
 	</div>
 	<div class="push"></div>

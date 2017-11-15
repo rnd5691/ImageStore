@@ -12,7 +12,6 @@ import com.imagestore.action.Action;
 import com.imagestore.action.ActionFoward;
 import com.imagestore.file.FileDAO;
 import com.imagestore.file.FileDTO;
-import com.imagestore.member.MemberDAO;
 import com.imagestore.member.MemberDTO;
 import com.imagestore.person.PersonDAO;
 import com.imagestore.person.PersonDTO;

@@ -118,14 +118,15 @@ footer	{
 	width: 500px;
 	height: 100px;
 }
-
-.footer_wrap>img{
+.img{
+	display: inline-block;
+}
+.img>img{
 	display: inline-block;
 	overflow: hidden;
 	width: 100px;
-	height: 100%;
+	height: auto;
 	vertical-align: inherit;
-	background-color: yellow;
 }
 .footer_text	{
 	display: inline-block;

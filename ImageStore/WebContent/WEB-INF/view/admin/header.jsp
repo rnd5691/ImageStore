@@ -4,11 +4,11 @@
 <!-- header start -->
 	<header>
 		<div class="header_wrap">
-			<a href="<%=request.getContextPath()%>/qna/qnaList.qna"><img class="logo" align="middle" alt="logo" src="<%=request.getContextPath()%>/images/logo.png"></a>
+			<a href="${pageContext.request.contextPath}/qna/qnaList.qna"><img class="logo" align="middle" alt="logo" src="${pageContext.request.contextPath}/images/logo.png"></a>
 			<ul class="header_join">
-				<li><a href="#">Q&A</a></li>
-				<li><a href="#">작품 승인 관리</a></li>
-				<li><a href="<%=request.getContextPath()%>/member/memberLogout.member">로그아웃</a></li>
+				<li><a href="${pageContext.request.contextPath}/qna/qnaList.qna">Q&A</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/mypageSalesRequestList.mypage">작품 승인 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/memberLogout.member">로그아웃</a></li>
 			</ul>
 		</div>
 		

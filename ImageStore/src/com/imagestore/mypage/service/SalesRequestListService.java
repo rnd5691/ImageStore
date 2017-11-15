@@ -31,17 +31,28 @@ public class SalesRequestListService implements Action {
 		int totalCount = 0;
 		
 		try{
-			totalCount = workDAO.getTotalCount(memberDTO.getUser_num());
-			PageMaker pageMaker = new PageMaker(curPage, totalCount);
-			List<WorkDTO> ar = workDAO.selectList(memberDTO.getUser_num(), pageMaker.getMakeRow());
+			
+			List<WorkDTO> ar = null;
+			PageMaker pageMaker = null;
+			if(memberDTO.getKind().equals("admin")){
+				totalCount = workDAO.getTotalCount();
+				pageMaker = new PageMaker(curPage, totalCount);
+				ar = workDAO.adminSelectList(pageMaker.getMakeRow());
+				actionFoward.setPath("../WEB-INF/view/admin/salesRequestList.jsp");
+			}else{
+				totalCount = workDAO.getTotalCount(memberDTO.getUser_num());
+				pageMaker = new PageMaker(curPage, totalCount);
+				ar = workDAO.selectList(memberDTO.getUser_num(), pageMaker.getMakeRow());
+				
+				actionFoward.setPath("../WEB-INF/view/MYPAGE/salesRequestList.jsp");
+			}
+			
 			request.setAttribute("list", ar);
 			request.setAttribute("makePage", pageMaker.getMakePage());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		actionFoward.setCheck(true);
-		actionFoward.setPath("../WEB-INF/view/MYPAGE/salesRequestList.jsp");
-		
 		return actionFoward;
 	}
 

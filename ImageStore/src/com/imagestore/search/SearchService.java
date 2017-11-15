@@ -1,7 +1,6 @@
 package com.imagestore.search;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

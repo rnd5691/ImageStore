@@ -37,7 +37,7 @@
 
 <!-- contents start -->
 <!-- menu는 mypage나 구매목록이 나오는 탭 부분 -->
-
+<c:if test="${!empty requestScope.work}">
 <div class="body">
 
 <c:import url="./menu.jsp"></c:import>
@@ -50,15 +50,17 @@
 		<input type="hidden" name="file_kind" value="${requestScope.file.file_kind}">
 		<table class="table">
 			<tr>
-				<td rowspan="9" colspan="2">
-					<c:if test="${requestScope.file.file_kind eq 'image'}">
+         		<c:if test="${requestScope.file.file_kind eq 'image'}">
+            		<td rowspan="9" colspan="2">
 						<img src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name}">
-					</c:if>
-					<c:if test="${requestScope.file.file_kind eq 'video'}">
+					</td>
+				</c:if>
+				<c:if test="${requestScope.file.file_kind eq 'video'}">
+					<td rowspan="8" colspan="2">
 						<video src="${pageContext.request.contextPath}/upload/${requestScope.file.file_name} " width="310" height="310" controls="controls"></video>
-					</c:if>
-				</td>
-			</tr>
+					</td>
+				</c:if>
+         	</tr>
 			<tr>
 				<td>작품명</td>
 				<td><input name="work" type="text" readonly="readonly" value="${requestScope.work.work}"></td>
@@ -79,10 +81,12 @@
 				<td>가격</td>
 				<td><input name="price" type="text" readonly="readonly" value="${requestScope.work.price}"></td>
 			</tr>
-			<tr>
-				<td>파일 사이즈</td>
-				<td><input class="size" name="width" type="text" readonly="readonly" value="${requestScope.file.width }"> X <input class="size" name="height" type="text"readonly="readonly" value="${requestScope.file.height}"></td>
-			</tr>
+			<c:if test="${requestScope.file.file_kind eq 'image'}">
+		         <tr>
+		            <td>파일 사이즈</td>
+		            <td><input class="size" name="width" type="text" readonly="readonly" value="${requestScope.file.width }"> X <input class="size" name="height" type="text"readonly="readonly" value="${requestScope.file.height}"></td>
+		         </tr>
+	     	</c:if>
 			<tr>
 				<td>상세 내용</td>
 				<td><textarea name="contents" readonly="readonly">${requestScope.work.contents}</textarea></td>
@@ -97,15 +101,21 @@
 				<textarea name="reply" readonly="readonly">${requestScope.work.reply }</textarea>
 			</div>		
 		</c:if>
-		<c:if test="${requestScope.work.upload_check eq '대기중' && empty requestScope.work.reply}">
-		<input type="button" class="bloat btn btn-default" id="viewDelete" value="DELETE">
-		<input type="button" class="bloat btn btn-default" id="viewUpdate" value="UPDATE">
-		</c:if>
+		<c:if test="${requestScope.work.upload_check eq '대기중' || requestScope.work.upload_check eq '거부'}">
+	      <input type="button" class="bloat btn btn-default" id="viewDelete" value="DELETE">
+	      <input type="button" class="bloat btn btn-default" id="viewUpdate" value="UPDATE">
+      	</c:if>
 	</form>
 </div>
 <div class="push"></div>
 </div>
-
+</c:if>
+<c:if test="${empty requestScope.work}">
+	<script type="text/javascript">
+		alert('해당하는 번호가 없습니다.');
+		location.href="mypageSalesRequestList.mypage";
+	</script>
+</c:if>
 <!-- contents finish -->
 
 <!-- footer start -->
