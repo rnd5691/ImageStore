@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/mypage/mypage.css" rel="stylesheet">
-<link href="../css/sales/salesMoney.css" rel="stylesheet">
+<link href="../css/mypage/salesMoney.css" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
 	$("#salesRequestMoney").css('color', 'white');
