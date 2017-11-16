@@ -1,6 +1,7 @@
 package com.imagestore.search;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,13 +28,9 @@ public class SearchService implements Action {
 		String select = request.getParameter("select");
 		String kind = request.getParameter("kind");
 		String check = request.getParameter("check");
-		
-		System.out.println("select : "+select);
-		
-		
-		
+
 		List<WorkDTO> ar = null;
-		List<FileDTO> fileName = null;
+		List<FileDTO> fileName = new ArrayList<>();
 		FileDTO fileDTO = null;
 		try {
 			Connection con = DBConnector.getConnect();
@@ -41,22 +38,24 @@ public class SearchService implements Action {
 			ar = workDAO.selectAll(con);
 			
 			for(int i=0; i<ar.size(); i++) {
+				
 				fileDTO = new FileDTO();
 				String[] tag = ar.get(i).getTag().split(",");
 				fileDTO = fileDAO.selectOne(ar.get(i).getWork_seq(), con);
+				
 				for(int j=0; j<tag.length; j++) {
-					System.out.println("tag["+j+"]"+tag[j]);
-					System.out.println("fileDTO : "+fileDTO.getFile_kind()); 
 					if(tag[j].trim().equals(search) && fileDTO.getFile_kind().equals(select)) {
-						fileName = workDAO.seachWorkSEQ(con, tag[j]);
+						fileName.add(fileDTO);
 					}
 				}
 			}
-			/*ar = fileDAO.fileSelectAll();//파일 데이터들을 가져옴*/
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		for(int i=0; i<fileName.size(); i++){
+			System.out.println("작품번호 : "+fileName.get(i).getWork_seq());
+		}
 		request.setAttribute("author", fileName);
 		request.setAttribute("file", ar);
 		request.setAttribute("search", search);

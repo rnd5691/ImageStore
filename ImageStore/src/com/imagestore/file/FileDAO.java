@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.imagestore.util.DBConnector;
-import com.imagestore.work.WorkDTO;
-
 public class FileDAO {
 	
 	//salesReuqestViewDelete
@@ -52,6 +49,7 @@ public class FileDAO {
 			fileDTO.setWidth(rs.getString("width"));
 			fileDTO.setHeight(rs.getString("height"));
 			fileDTO.setFile_kind(rs.getString("file_kind"));
+			fileDTO.setWork_seq(work_seq);
 		}
 		rs.close();
 		st.close();

@@ -15,12 +15,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- flex Imagae plugin -->
-<link
-	href="/FILEUPLOAD/plugin/jQuery-flexImages-master/jquery.flex-images.css"
-	rel="stylesheet">
-<script
-	src="/FILEUPLOAD/plugin/jQuery-flexImages-master/jquery.flex-images.min.js"></script>
-	
+<link href="${pageContext.request.contextPath}/plugin/jQuery-flexImages-master/jquery.flex-images.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/plugin/jQuery-flexImages-master/jquery.flex-images.min.js"></script>
 
 <title>Insert title here</title>
 <style type="text/css">
@@ -219,7 +215,7 @@
 					<input type="hidden" name="perPage" value="1">
 					<input type="hidden" id="check" name="check" value="${requestScope.check }">
 					<select id="select" name="select" class="form-control">
-						<option id="select-img" value="">사진</option>
+						<option id="select-img" value="image">사진</option>
 						<option id="select-video" value="video">비디오</option>
 					</select> 
 					<input type="button" class="btn btn-default" id="btn">
@@ -242,7 +238,12 @@
       <div id="flex-image2" class="flex-image2">
       	<c:forEach items="${requestScope.author}" var="author">
       		<div class="item item${author.file_num}">
-      			<a href="searchView.search?work_seq=${author.work_seq}"><img src="${pageContext.request.contextPath}/upload/${author.file_name}"></a>
+      			<c:if test="${author.file_kind eq 'image' }">
+      				<a href="searchView.search?work_seq=${author.work_seq}"><img src="${pageContext.request.contextPath}/upload/${author.file_name}"></a>
+      			</c:if>
+      			<c:if test="${author.file_kind eq 'video' }">		
+ -      			<video src="${pageContext.request.contextPath}/upload/${author.file_name}" width="280" height="180" controls="controls"></video>		
+ -      		</c:if>
       		</div>
       	</c:forEach>
 	   </div>
