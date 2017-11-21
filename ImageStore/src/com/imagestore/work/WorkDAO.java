@@ -10,6 +10,23 @@ import com.imagestore.util.DBConnector;
 import com.imagestore.util.MakeRow;
 
 public class WorkDAO {
+	
+	//판매여부 업데이트
+	public int sellUpdate(int work_seq, String sell) throws Exception	{
+		Connection con = DBConnector.getConnect();
+		String sql = "update work_info set sell=? where work_seq=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, sell);
+		st.setInt(2, work_seq);
+		
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		
+		return result;
+	}
+	
 	//관리자 승인시 업데이트
 	public int approvalUpdate(int work_seq) throws Exception{
 		Connection con = DBConnector.getConnect();
@@ -122,7 +139,7 @@ public class WorkDAO {
 	
 		//모든정보 가져와!
 		public List<WorkDTO> selectAll(Connection con) throws Exception {
-			String sql = "SELECT * FROM work_info where upload_check='승인'";
+			String sql = "SELECT * FROM work_info where upload_check='승인' and sell='Y'";
 			PreparedStatement st = con.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
 			List<WorkDTO> ar = new ArrayList<>();

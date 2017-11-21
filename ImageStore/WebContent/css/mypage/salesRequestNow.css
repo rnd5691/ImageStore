@@ -60,11 +60,52 @@ h4	{
 }
 
 
-.images	{
+.images1	{
 	width: 200px;
 	height: 200px;
 }
 
 .tdtable1	{
 	padding-right: 10px;
+}
+
+.trtable1	{
+	display: inline-block;
+	
+}
+
+.#btn	{
+	float: right;
+	width: 140px;
+}
+
+
+.imgvideo	{
+	display: inline-block;
+}
+
+#btn_video	{
+	width: 140px;
+	float: right;
+}
+
+#btn_image	{
+	width: 140px;
+	float: right;
+}
+
+.pagination > a	{
+	vertical-align: center;
+}
+
+.tab-content	{
+	width: 700px;
+}
+
+.nav-tabs	{
+	width: 700px;
+}
+
+.container	{
+	width: 700px;
 }

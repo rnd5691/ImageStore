@@ -1,8 +1,10 @@
 package com.imagestore.file;
 
-public class FileDTO {
+import com.imagestore.work.WorkDTO;
+
+public class FileDTO extends WorkDTO {
 	private int file_num;
-	private int work_seq;
+	
 	private String file_route;
 	private String width;
 	private String height;
@@ -14,12 +16,7 @@ public class FileDTO {
 	public void setFile_kind(String file_kind) {
 		this.file_kind = file_kind;
 	}
-	public int getWork_seq() {
-		return work_seq;
-	}
-	public void setWork_seq(int work_seq) {
-		this.work_seq = work_seq;
-	}
+	
 	private String file_name;
 	
 	public int getFile_num() {
